@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="400.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alstom.controller.Personnels">
+   <left>
+      <VBox alignment="CENTER_LEFT" prefHeight="500.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <ImageView fitHeight="116.0" fitWidth="169.0" onMouseClicked="#AjoutterRes" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/addResProd.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="40.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="VboxSelect" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez selectionnez le nom de responsable production " textAlignment="CENTER" wrappingWidth="147.9296875">
+                     <font>
+                        <Font name="Arial Italic" size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXComboBox fx:id="Combo" onAction="#AchtionCombo" prefHeight="29.0" prefWidth="148.0" promptText="Nom.." />
+                  <Label fx:id="IdLabel">
+                   <font>
+                         <Font name="Arial" size="14.0" />
+                   </font>
+                  </Label>
+                  <Label fx:id="NomLabel">
+                   <font>
+                        <Font name="Arial" size="14.0" />
+                    </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
+            <VBox fx:id="VboxAdd" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0">
+               <children>
+                  <JFXTextField fx:id="NomRes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="253.0" promptText="Nom...">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></JFXTextField>
+                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <JFXButton onAction="#AddResProd" text="Ajoutter" />
+                        <JFXButton onAction="#FermeAdd" text="Annuller" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </opaqueInsets>
+      </VBox>
+   </left>
+   <center>
+      <TableView fx:id="KitTable" prefHeight="500.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="OfColumn" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="OF" />
+           <TableColumn fx:id="ProjetColumn" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Projet" />
+            <TableColumn fx:id="dateEntreeColumn" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="Date d'entrée" />
+            <TableColumn fx:id="dateSortieColumn" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="Date de sortie" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

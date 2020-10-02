@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="container"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.alstom.controller.Menu">
+	<center>
+		<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+			<children>
+				<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0"
+					HBox.hgrow="ALWAYS">
+					<children>
+						<ImageView fitHeight="178.0" fitWidth="199.0"
+							onMouseClicked="#menuKits" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/packet.png" />
+							</image>
+						</ImageView>
+						<Label onMouseClicked="#menuKits" text="Kits">
+							<font>
+								<Font name="System Bold" size="16.0" />
+							</font>
+							<VBox.margin>
+								<Insets top="35.0" />
+							</VBox.margin>
+						</Label>
+					</children>
+				</VBox>
+				<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0"
+					HBox.hgrow="ALWAYS">
+					<children>
+
+						<ImageView fitHeight="194.0" fitWidth="185.0"
+							onMouseClicked="#menuPersonnels" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/user.png" />
+							</image>
+						</ImageView>
+						<Label onMouseClicked="#menuPersonnels" text="Personnels">
+							<font>
+								<Font name="System Bold" size="16.0" />
+							</font>
+							<VBox.margin>
+								<Insets top="35.0" />
+							</VBox.margin>
+						</Label>
+					</children>
+				</VBox>
+				<VBox alignment="CENTER" layoutX="399.0" layoutY="10.0"
+					prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+					<children>
+						<ImageView fitHeight="194.0" fitWidth="199.0"
+							onMouseClicked="#menuEmplacements" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/warehouse.png" />
+							</image>
+						</ImageView>
+						<Label onMouseClicked="#menuEmplacements"
+							text="Emplacements">
+							<font>
+								<Font name="System Bold" size="16.0" />
+							</font>
+							<VBox.margin>
+								<Insets top="15.0" />
+							</VBox.margin>
+						</Label>
+					</children>
+				</VBox>
+				<VBox alignment="CENTER" layoutX="1152.0" layoutY="10.0"
+					prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+					<children>
+
+						<ImageView fitHeight="170.0" fitWidth="164.0"
+							onMouseClicked="#menuKPI" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/progress.png" />
+							</image>
+						</ImageView>
+						<Label onMouseClicked="#menuKPI" text="KPI">
+							<font>
+								<Font name="System Bold" size="16.0" />
+							</font>
+							<VBox.margin>
+								<Insets top="45.0" />
+							</VBox.margin>
+						</Label>
+					</children>
+				</VBox>
+
+			</children>
+		</HBox>
+	</center>
+</BorderPane>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import eu.hansolo.medusa.Gauge?>
+<!-- <?import eu.hansolo.medusa.FGauge?>
+<?import eu.hansolo.medusa.Gauge?> -->
+
+
+<BorderPane prefHeight="500.0" prefWidth="1100.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.alstom.controller.KPI">
+	<center>
+		<VBox prefHeight="500.0" prefWidth="1100.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<HBox prefHeight="250.0" prefWidth="1100.0">
+					<children>
+						<HBox prefHeight="250.0" prefWidth="550.0">
+							<children>
+								<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER">
+									<children>
+										<!-- <PieChart fx:id="chart_stock" prefHeight="208.0"
+											prefWidth="293.0" /> 
+										 -->
+									<Gauge fx:id="chart_stock2"/>
+									</children>
+								</HBox>
+							</children>
+						</HBox>
+						<VBox alignment="CENTER" prefHeight="250.0" prefWidth="275.0">
+							<children>
+								<HBox alignment="CENTER_LEFT" prefHeight="80.0"
+									prefWidth="550.0">
+									<children>
+										<ImageView fitHeight="52.0" fitWidth="200.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../icons/up.png" />
+											</image>
+										</ImageView>
+										<Label text="Sortie   :">
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+											<font>
+												<Font name="Arial Bold" size="17.0" />
+											</font>
+										</Label>
+										<Label fx:id="nombre_sortie">
+											<font>
+												<Font size="17.0" />
+											</font>
+										</Label>
+									</children>
+								</HBox>
+								<HBox alignment="CENTER_LEFT" prefHeight="80.0"
+									prefWidth="550.0">
+									<children>
+										<ImageView fitHeight="52.0" fitWidth="200.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../icons/en_stock.png" />
+											</image>
+										</ImageView>
+										<Label text="En stock:">
+											<font>
+												<Font name="Arial Bold" size="17.0" />
+											</font>
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+										</Label>
+										<Label fx:id="nombre_stock">
+											<font>
+												<Font size="17.0" />
+											</font>
+										</Label>
+									</children>
+								</HBox>
+
+							</children>
+						</VBox>
+						<VBox alignment="CENTER" prefHeight="250.0" prefWidth="275.0">
+							<children>
+								<HBox alignment="CENTER_LEFT" prefHeight="80.0"
+									prefWidth="550.0">
+									<children>
+
+										<Label text="Possession">
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+											<font>
+												<Font name="Arial Bold" size="17.0" />
+											</font>
+										</Label>
+										<Label fx:id="StockMoyen">
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+											<font>
+												<Font name="Arial Bold" size="17.0" />
+											</font>
+										</Label>
+
+									</children>
+								</HBox>
+							</children>
+						</VBox>
+					</children>
+				</HBox>
+				<HBox prefHeight="250.0" prefWidth="1100.0">
+					<children>
+						<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER">
+							<children>
+								<PieChart fx:id="chart_projet" prefHeight="208.0"
+									prefWidth="293.0" />
+								
+							</children>
+						</HBox>
+						<HBox prefHeight="250.0" prefWidth="550.0">
+							<children>
+								<BarChart title="Stockage moyen des OF/Semaine"
+									fx:id="Barchart" legendVisible="false">
+									<xAxis><!-- fx:id="Semaineaxis" -->
+										<CategoryAxis label="Semaine" side="BOTTOM"
+											fx:id="Semaineaxis" />
+									</xAxis>
+									<!-- fx:id="OFaxis" -->
+									<yAxis>
+										<NumberAxis label="Nombre des OF" side="LEFT"
+											fx:id="OFaxis" />
+									</yAxis>
+								</BarChart>
+							</children>
+						</HBox>
+					</children>
+				</HBox>
+			</children>
+			<BorderPane.margin>
+				<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+			</BorderPane.margin>
+		</VBox>
+	</center>
+</BorderPane>

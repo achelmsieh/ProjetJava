@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="500.0" minWidth="800.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.alstom.controller.LivrerKit">
+	<bottom>
+		<HBox alignment="CENTER_RIGHT" BorderPane.alignment="BOTTOM_LEFT">
+			<children>
+				<JFXButton onAction="#fermerFenetre" text="Annuler"
+					textFill="#05aaeb">
+					<HBox.margin>
+						<Insets right="20.0" />
+					</HBox.margin>
+				</JFXButton>
+				<JFXButton onAction="#validerSelection"
+					style="-fx-background-color: #28A745;" text="Valider"
+					textFill="WHITE">
+					<HBox.margin>
+						<Insets />
+					</HBox.margin>
+					<padding>
+						<Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+					</padding>
+					<font>
+						<Font name="System Bold" size="15.0" />
+					</font>
+				</JFXButton>
+			</children>
+			<opaqueInsets>
+				<Insets />
+			</opaqueInsets>
+			<padding>
+				<Insets top="20.0" />
+			</padding>
+		</HBox>
+	</bottom>
+	<left>
+		<VBox alignment="CENTER" minHeight="400.0" minWidth="260.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<ImageView fitHeight="150.0" fitWidth="200.0"
+					pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../icons/barcode-scanner.png" />
+					</image>
+					<VBox.margin>
+						<Insets top="20.0" />
+					</VBox.margin>
+				</ImageView>
+				<TextField fx:id="of_text" alignment="CENTER"
+					promptText="OF...">
+					<VBox.margin>
+						<Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
+					</VBox.margin>
+				</TextField>
+				<JFXComboBox fx:id="Combo" prefHeight="25.0"
+					prefWidth="177.0" promptText="Responsable de production">
+					<VBox.margin>
+						<Insets top="20.0" />
+					</VBox.margin>
+				</JFXComboBox>
+
+			</children>
+		</VBox>
+	</left>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
+	<center>
+		<VBox prefHeight="200.0" prefWidth="100.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<TableView fx:id="table_of_zone" minHeight="400.0"
+					minWidth="500.0" VBox.vgrow="ALWAYS">
+					<columns>
+						<TableColumn fx:id="colone_corodonne"
+							prefWidth="168.0" text="Emplacement" />
+						<TableColumn fx:id="conlone_of" prefWidth="169.0"
+							text="OF" />
+						<TableColumn fx:id="colone_projet" prefWidth="180.0"
+							text="Projet" />
+					</columns>
+				</TableView>
+			</children>
+		</VBox>
+	</center>
+</BorderPane>

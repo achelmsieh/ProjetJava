@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="container" minHeight="600.0" minWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alstom.controller.Accueil">
+	<center>
+
+	</center>
+	<top>
+		<BorderPane minHeight="100.0" minWidth="1100.0" BorderPane.alignment="CENTER">
+			<left>
+				<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+					<image>
+						<Image url="@../icons/coupure.gif" />
+					</image>
+				</ImageView>
+			</left>
+			<center>
+				<HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+					<children>
+						<JFXButton fx:id="btnAccueil" onMouseClicked="#menuAccueil" style="-fx-background-color: #fc1616;" text="Accueil" textFill="WHITE">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton fx:id="btnKits" layoutX="40.0" layoutY="36.0" onMouseClicked="#menuKits" style="-fx-background-color: transparent;" text="Kits">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton fx:id="btnPersonnels" layoutX="125.0" layoutY="36.0" onMouseClicked="#menuPersonnels" style="-fx-background-color: transparent;" text="Personnels">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton fx:id="btnEmplacements" layoutX="175.0" layoutY="36.0" onMouseClicked="#menuEmplacements" style="-fx-background-color: transparent;" text="Emplacements">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton fx:id="btnKPI" layoutX="232.0" layoutY="36.0" onMouseClicked="#menuKPI" style="-fx-background-color: transparent;" text="KPI">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+						</JFXButton>
+					</children>
+					<BorderPane.margin>
+						<Insets left="30.0" />
+					</BorderPane.margin>
+					<padding>
+						<Insets top="10.0" />
+					</padding>
+				</HBox>
+			</center>
+			<right>
+				<JFXButton fx:id="btnDeconnection" onMouseClicked="#seDeconncecter" style="-fx-background-color: #F5BA53;" text="Se déconnecter" BorderPane.alignment="CENTER">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+					<padding>
+						<Insets bottom="8.0" left="12.0" right="12.0" top="8.0" />
+					</padding>
+					<BorderPane.margin>
+						<Insets top="10.0" />
+					</BorderPane.margin>
+				</JFXButton>
+			</right>
+			<BorderPane.margin>
+				<Insets left="50.0" right="50.0" />
+			</BorderPane.margin>
+		</BorderPane>
+	</top>
+	<center>
+		<Pane fx:id="contentArea" minHeight="500.0" minWidth="1100.0" BorderPane.alignment="CENTER" />
+	</center>
+</BorderPane>
