@@ -27,27 +27,22 @@ public class GenericController {
 	}
 
 	protected void toMenuAccueil() {
-		System.out.println("Accueil");
 		changeMenu(FxmlView.MENU);
 	}
 
 	protected void toMenuKits() {
-		System.out.println("kitService");
 		changeMenu(FxmlView.KITS);
 	}
 
 	protected void toMenuPersonnels() {
-		System.out.println("persons");
 		changeMenu(FxmlView.PERSONNELS);
 	}
 
 	protected void toMenuZones() {
-		System.out.println("zones");
 		changeMenu(FxmlView.ZONES);
 	}
 
 	protected void toMenuKPI() {
-		System.out.println("kpi");
 		changeMenu(FxmlView.KPI);
 	}
 }

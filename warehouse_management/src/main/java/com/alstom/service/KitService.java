@@ -41,19 +41,17 @@ public class KitService {
 	}
 
 	public List<Kit> getKits(int limit) {
-		List<Kit> kits = null;
-
 		if (limit <= 0)
 			limit = fetchLimit;
 
 		Query query = em.createQuery("SELECT k FROM Kit k ORDER BY k.dateEntree DESC").setMaxResults(limit);
 		try {
-			kits = query.getResultList();
+			return query.getResultList();
 		} catch (Exception e) {
 			System.err.println(e);
+			return null;
 		}
 
-		return kits;
 	}
 
 	public Kit getKitByOF(String OF) {
@@ -79,32 +77,30 @@ public class KitService {
 	}
 
 	public List<Kit> searchKit(String OF) {
-		List<Kit> kits = null;
 
 		Query query = em
 				.createQuery("SELECT k FROM Kit k WHERE k.OF LIKE CONCAT('%',:OF,'%') ORDER BY k.dateEntree DESC");
 		query.setParameter("OF", OF);
 		try {
-			kits = query.getResultList();
+			return query.getResultList();
 		} catch (Exception e) {
 			System.err.println(e);
+			return null;
 		}
 
-		return kits;
 	}
 
 	public List<Kit> filterByEtat(EtatKit etat) {
-		List<Kit> kits = null;
 
 		Query query = em.createQuery("SELECT k FROM Kit k WHERE k.etat = :etat ORDER BY k.dateEntree DESC");
 		query.setParameter("etat", etat);
 		try {
-			kits = query.getResultList();
+			return query.getResultList();
 		} catch (Exception e) {
 			System.err.println(e);
+			return null;
 		}
 
-		return kits;
 	}
 
 	public void save(Kit kit) {

@@ -1,7 +1,6 @@
 package com.alstom.application;
 
 import com.alstom.connection.EntityManagerInitializer;
-import com.alstom.service.AppInitializer;
 import com.alstom.util.FxmlView;
 
 import javafx.application.Application;
@@ -18,8 +17,9 @@ public class Main extends Application {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
+
 		EntityManagerInitializer.init();
-		AppInitializer.init();
+//		AppInitializer.init();
 //		AppInitializer.fetchAllData();
 
 		try {

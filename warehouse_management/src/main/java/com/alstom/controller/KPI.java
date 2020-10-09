@@ -3,6 +3,7 @@ package com.alstom.controller;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -14,10 +15,8 @@ import com.alstom.service.EmplacementService;
 import com.alstom.service.KPIService;
 import com.alstom.service.KitService;
 
-import eu.hansolo.medusa.FGauge;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.TickLabelOrientation;
-import eu.hansolo.medusa.skins.ModernSkin;
 import eu.hansolo.medusa.skins.SlimSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,30 +74,35 @@ public class KPI implements Initializable {
 		double percentocuppe = (double) countOccupeEmplacement / (double) countAllEmplacement;
 		ObservableList<PieChart.Data> pieChartData1 = FXCollections.observableArrayList(
 				new PieChart.Data("Free", percentfree), new PieChart.Data("Ocuppé", percentocuppe));
-		ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList(
-				new PieChart.Data("Projet3", 60), new PieChart.Data("Projet2", 25), new PieChart.Data("Projet1", 15));
-		nombre_stock.setText("  " + Long.toString(kpis.get_nombre_stock()) + " OF.");
-		nombre_sortie.setText("  " + Long.toString(kpis.get_all() - kpis.get_nombre_stock()) + " OF.");
+//		ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList(
+//				new PieChart.Data("Projet3", 60), new PieChart.Data("Projet2", 25), new PieChart.Data("Projet1", 15));
+
+		Map<String, Long> mapProj = kits.getKits().stream().collect(
+				Collectors.groupingBy(k -> k.getProjet() != null ? k.getProjet() : "autres", Collectors.counting()));
+		ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList();
+		mapProj.forEach((k, v) -> pieChartData2.add(new PieChart.Data(k + " [" + v + "]", v)));
+
+		nombre_stock.setText("  " + Long.toString(kpis.getKitsEnStockCount()) + " OF.");
+		nombre_sortie.setText("  " + Long.toString(kpis.getKitsCount() - kpis.getKitsEnStockCount()) + " OF.");
 
 //		chart_stock.setData(pieChartData1);
-		chart_stock2.setSkin(new SlimSkin(chart_stock2)); 
-		chart_stock2.setTitle("Niveau de Stock"); 
+		chart_stock2.setSkin(new SlimSkin(chart_stock2));
+		chart_stock2.setTitle("Niveau de Stock");
 		chart_stock2.setUnit("%");
-		chart_stock2.setDecimals(1); 
+		chart_stock2.setDecimals(1);
 		chart_stock2.setValue(percentocuppe);
-		
 
-		chart_stock2.setValueColor(Color.BLACK); 
-		chart_stock2.setTitleColor(Color.BLACK); 
+		chart_stock2.setValueColor(Color.BLACK);
+		chart_stock2.setTitleColor(Color.BLACK);
 		chart_stock2.setSubTitleColor(Color.RED);
-		
-		chart_stock2.setBarColor(Color.RED); 
-		chart_stock2.setNeedleColor(Color.BLACK); 
-		chart_stock2.setThresholdColor(Color.BLACK); 
+
+		chart_stock2.setBarColor(Color.RED);
+		chart_stock2.setNeedleColor(Color.BLACK);
+		chart_stock2.setThresholdColor(Color.BLACK);
 		chart_stock2.setTickLabelColor(Color.BLACK);
-		chart_stock2.setTickMarkColor(Color.BLACK); 
-		chart_stock2.setTickLabelOrientation(TickLabelOrientation.ORTHOGONAL);		
-		
+		chart_stock2.setTickMarkColor(Color.BLACK);
+		chart_stock2.setTickLabelOrientation(TickLabelOrientation.ORTHOGONAL);
+
 		chart_projet.setData(pieChartData2);
 
 		// barchart
@@ -109,8 +113,6 @@ public class KPI implements Initializable {
 
 		TreeMap<Integer, Long> Maptriee = new TreeMap<>(dd);
 
-//		Maptriee.forEach((k, v) -> serie.getData().add(new XYChart.Data<String,Long>(Integer.toString(k), v)));
-
 		for (int i = Maptriee.firstKey(); i < Maptriee.lastKey(); i++) {
 			if (Maptriee.get(i) == null) {
 				Maptriee.put(i, 0L);
@@ -118,13 +120,13 @@ public class KPI implements Initializable {
 		}
 		Maptriee.forEach((k, v) -> serie.getData().add(new XYChart.Data<String, Long>(Integer.toString(k), v)));
 		Barchart.getData().add(serie);
-		double SejourMoyen;
-		SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+//		SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		kits.getKits().stream().forEach(a -> {
 			try {
 				if (a.getDateSortie() != null) {
-					long diff = SDF.parse(a.getDateSortie().toString()).getTime()
-							- SDF.parse(a.getDateEntree().toString()).getTime();
+					long diff = sdf.parse(a.getDateSortie().toString()).getTime()
+							- sdf.parse(a.getDateEntree().toString()).getTime();
 
 					somme_jour += TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 				}

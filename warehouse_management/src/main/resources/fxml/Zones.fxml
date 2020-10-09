@@ -8,133 +8,281 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alstom.controller.Zones">
-   <center>
-      <GridPane fx:id="gridPane" minHeight="440.0" minWidth="-Infinity" prefWidth="1040.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="102.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="-Infinity" minHeight="205.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="205.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="2" />
-            <Label text="J" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="10.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="3" />
-            <Label layoutX="10.0" layoutY="60.0" text="K" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="10.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="5" />
-            <Label layoutX="10.0" layoutY="60.0" text="L" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="144.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="6" />
-            <Label layoutX="179.0" layoutY="60.0" text="M" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="99.0" layoutX="482.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-            <Label layoutX="482.0" layoutY="60.0" text="N" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="144.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Label layoutX="179.0" layoutY="60.0" text="E" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="247.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Label layoutX="247.0" layoutY="60.0" text="D" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="380.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Label layoutX="380.0" layoutY="60.0" text="C" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="482.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label layoutX="482.0" layoutY="60.0" text="B" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="612.0" layoutY="10.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.rowIndex="2" />
-            <Label layoutX="612.0" layoutY="60.0" text="A" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="482.0" layoutY="245.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="12" GridPane.rowIndex="2" />
-            <Label layoutX="482.0" layoutY="295.0" text="I" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="380.0" layoutY="245.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="11" GridPane.rowIndex="2" />
-            <Label layoutX="380.0" layoutY="295.0" text="H" GridPane.columnIndex="11" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="247.0" layoutY="245.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-            <Label layoutX="247.0" layoutY="295.0" text="G" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="205.0" layoutX="144.0" layoutY="245.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="100.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <Label layoutX="144.0" layoutY="295.0" text="F" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="72.0" />
-               </font>
-            </Label>
-         </children>
-      </GridPane>
-   </center>
-   <padding>
-      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-   </padding>
-   <top>
-      <JFXButton onMouseClicked="#retour" ripplerFill="WHITE" text=" " BorderPane.alignment="TOP_LEFT">
-         <graphic>
-            <ImageView fitHeight="58.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" style="visibility: false;">
-               <image>
-                  <Image url="@../icons/arrow.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
-   </top>
+<BorderPane fx:id="container"
+	maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+	minHeight="500.0" minWidth="1100.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.alstom.controller.Zones">
+	<center>
+		<GridPane fx:id="gridPane" minHeight="440.0"
+			minWidth="1040.0" BorderPane.alignment="CENTER">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="1.7976931348623157E308" minWidth="102.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints maxHeight="1.7976931348623157E308"
+					minHeight="205.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="-Infinity"
+					minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="1.7976931348623157E308"
+					minHeight="205.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<HBox style="-fx-background-color: #c6c6c6;"
+					GridPane.columnIndex="2" GridPane.hgrow="ALWAYS"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label text="J" GridPane.columnIndex="2"
+					GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="144.0" layoutY="12.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="3"
+					GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="10.0" layoutY="60.0" text="K"
+					GridPane.columnIndex="3" GridPane.halignment="CENTER"
+					GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox style="-fx-background-color: #c6c6c6;"
+					GridPane.columnIndex="5" GridPane.hgrow="ALWAYS"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="10.0" layoutY="60.0" text="L"
+					GridPane.columnIndex="5" GridPane.halignment="CENTER"
+					GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="380.0" layoutY="12.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="6"
+					GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="179.0" layoutY="60.0" text="M"
+					GridPane.columnIndex="6" GridPane.halignment="CENTER"
+					GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="614.0" layoutY="12.0"
+					style="-fx-background-color: transparent;" GridPane.columnIndex="8"
+					GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+				<HBox layoutX="482.0" layoutY="12.0" maxHeight="100.0"
+					minHeight="100.0" prefHeight="200.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="8"
+					GridPane.hgrow="ALWAYS" GridPane.valignment="TOP"
+					GridPane.vgrow="NEVER">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="482.0" layoutY="60.0" text="N"
+					GridPane.columnIndex="8" GridPane.halignment="CENTER"
+					GridPane.valignment="TOP">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="482.0" layoutY="12.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="12"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="482.0" layoutY="295.0" text="I"
+					GridPane.columnIndex="12" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="948.0" layoutY="245.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="11"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="380.0" layoutY="295.0" text="H"
+					GridPane.columnIndex="11" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="10.0" layoutY="10.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="9"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="247.0" layoutY="295.0" text="G"
+					GridPane.columnIndex="9" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="10.0" layoutY="10.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="8"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="144.0" layoutY="295.0" text="F"
+					GridPane.columnIndex="8" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="10.0" layoutY="10.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="6"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="179.0" layoutY="60.0" text="E"
+					GridPane.columnIndex="6" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="10.0" layoutY="10.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="5"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="247.0" layoutY="60.0" text="D"
+					GridPane.columnIndex="5" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="10.0" layoutY="10.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="3"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="380.0" layoutY="60.0" text="C"
+					GridPane.columnIndex="3" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="10.0" layoutY="10.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.columnIndex="2"
+					GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+					GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="482.0" layoutY="60.0" text="B"
+					GridPane.columnIndex="2" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2" GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+				<HBox layoutX="10.0" layoutY="10.0"
+					style="-fx-background-color: #c6c6c6;" GridPane.hgrow="ALWAYS"
+					GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+					</GridPane.margin>
+				</HBox>
+				<Label layoutX="612.0" layoutY="60.0" text="A"
+					GridPane.halignment="CENTER" GridPane.rowIndex="2"
+					GridPane.valignment="CENTER">
+					<font>
+						<Font name="System Bold" size="72.0" />
+					</font>
+				</Label>
+			</children>
+		</GridPane>
+	</center>
+	<padding>
+		<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+	</padding>
+	<top>
+		<JFXButton onMouseClicked="#retour" ripplerFill="WHITE"
+			text=" " BorderPane.alignment="TOP_LEFT">
+			<graphic>
+				<ImageView fitHeight="58.0" fitWidth="44.0"
+					pickOnBounds="true" preserveRatio="true" style="visibility: false;">
+					<image>
+						<Image url="@../icons/arrow.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</JFXButton>
+	</top>
 </BorderPane>

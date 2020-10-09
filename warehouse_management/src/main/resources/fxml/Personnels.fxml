@@ -15,82 +15,120 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="400.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alstom.controller.Personnels">
-   <left>
-      <VBox alignment="CENTER_LEFT" prefHeight="500.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0">
-               <children>
-                  <ImageView fitHeight="116.0" fitWidth="169.0" onMouseClicked="#AjoutterRes" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/addResProd.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </ImageView>
-               </children>
-               <padding>
-                  <Insets bottom="40.0" />
-               </padding>
-            </VBox>
-            <VBox fx:id="VboxSelect" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez selectionnez le nom de responsable production " textAlignment="CENTER" wrappingWidth="147.9296875">
-                     <font>
-                        <Font name="Arial Italic" size="14.0" />
-                     </font>
-                  </Text>
-                  <JFXComboBox fx:id="Combo" onAction="#AchtionCombo" prefHeight="29.0" prefWidth="148.0" promptText="Nom.." />
-                  <Label fx:id="IdLabel">
-                   <font>
-                         <Font name="Arial" size="14.0" />
-                   </font>
-                  </Label>
-                  <Label fx:id="NomLabel">
-                   <font>
-                        <Font name="Arial" size="14.0" />
-                    </font>
-                  </Label>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </VBox>
-            <VBox fx:id="VboxAdd" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0">
-               <children>
-                  <JFXTextField fx:id="NomRes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="253.0" promptText="Nom...">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin></JFXTextField>
-                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                     <children>
-                        <JFXButton onAction="#AddResProd" text="Ajoutter" />
-                        <JFXButton onAction="#FermeAdd" text="Annuller" />
-                     </children>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-         <opaqueInsets>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </opaqueInsets>
-      </VBox>
-   </left>
-   <center>
-      <TableView fx:id="KitTable" prefHeight="500.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="OfColumn" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="OF" />
-           <TableColumn fx:id="ProjetColumn" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Projet" />
-            <TableColumn fx:id="dateEntreeColumn" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="Date d'entrée" />
-            <TableColumn fx:id="dateSortieColumn" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="Date de sortie" />
-        </columns>
-      </TableView>
-   </center>
+<BorderPane maxHeight="1.7976931348623157E308"
+	maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="1100.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.alstom.controller.Personnels">
+	<left>
+		<VBox alignment="CENTER_LEFT" minHeight="500.0" minWidth="300.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<VBox alignment="CENTER" minWidth="300.0">
+					<children>
+						<ImageView fitHeight="116.0" fitWidth="169.0"
+							onMouseClicked="#AjouterRes" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/addResProd.png" />
+							</image>
+							<VBox.margin>
+								<Insets top="30.0" />
+							</VBox.margin>
+						</ImageView>
+					</children>
+					<padding>
+						<Insets bottom="40.0" />
+					</padding>
+				</VBox>
+				<VBox fx:id="VboxSelect" alignment="CENTER"
+					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+					minWidth="300.0" spacing="20.0">
+					<children>
+						<Text strokeType="OUTSIDE" strokeWidth="0.0"
+							text="Veuillez selectionnez le nom de responsable production "
+							textAlignment="CENTER" wrappingWidth="236.9296875">
+							<font>
+								<Font name="Arial Italic" size="14.0" />
+							</font>
+						</Text>
+						<JFXComboBox fx:id="Combo" minHeight="35.0"
+							minWidth="230.0" onAction="#ActionCombo" promptText="Nom.." />
+						<Label fx:id="IdLabel">
+							<font>
+								<Font name="Arial" size="16.0" />
+							</font>
+						</Label>
+						<Label fx:id="NomLabel">
+							<font>
+								<Font name="Arial" size="16.0" />
+							</font>
+						</Label>
+					</children>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<VBox.margin>
+						<Insets />
+					</VBox.margin>
+					<padding>
+						<Insets bottom="15.0" top="15.0" />
+					</padding>
+				</VBox>
+				<VBox fx:id="VboxAdd" alignment="CENTER" maxHeight="-Infinity"
+					maxWidth="-Infinity" minHeight="-Infinity" minWidth="300.0">
+					<children>
+						<JFXTextField fx:id="NomRes" maxHeight="-Infinity"
+							maxWidth="-Infinity" minHeight="35.0" minWidth="230.0"
+							promptText="Nom...">
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+						</JFXTextField>
+						<HBox alignment="CENTER" minHeight="50.0" minWidth="300.0"
+							spacing="5.0">
+							<children>
+								<JFXButton buttonType="RAISED" onAction="#AddResProd"
+									style="-fx-background-color: #04599C;" text="Ajouter"
+									textFill="WHITE">
+									<HBox.margin>
+										<Insets />
+									</HBox.margin>
+									<padding>
+										<Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+									</padding>
+								</JFXButton>
+								<JFXButton onAction="#FermeAdd" text="Annuler" />
+							</children>
+							<VBox.margin>
+								<Insets top="20.0" />
+							</VBox.margin>
+						</HBox>
+					</children>
+				</VBox>
+			</children>
+			<opaqueInsets>
+				<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+			</opaqueInsets>
+		</VBox>
+	</left>
+	<center>
+		<TableView fx:id="KitTable"
+			maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+			minWidth="760.0" BorderPane.alignment="CENTER">
+			<columns>
+				<TableColumn fx:id="OfColumn" maxWidth="-1.0"
+					minWidth="190.0" prefWidth="-1.0" text="OF" />
+				<TableColumn fx:id="ProjetColumn" maxWidth="-1.0"
+					minWidth="190.0" prefWidth="-1.0" text="Projet" />
+				<TableColumn fx:id="dateEntreeColumn" maxWidth="-1.0"
+					minWidth="190.0" prefWidth="-1.0" text="Date d'entrée" />
+				<TableColumn fx:id="dateSortieColumn" maxWidth="-1.0"
+					minWidth="190.0" prefWidth="-1.0" text="Date de sortie" />
+			</columns>
+		</TableView>
+	</center>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
 </BorderPane>

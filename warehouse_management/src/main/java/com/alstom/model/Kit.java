@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +25,8 @@ import javax.persistence.TemporalType;
 public class Kit {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "kit_id_sequence")
+	@SequenceGenerator(name = "kit_id_sequence", sequenceName = "KIT_ID_SEQ")
 	private long id;
 
 	@Column(name = "[OF]")
@@ -34,6 +36,12 @@ public class Kit {
 	private EtatKit etat;
 
 	private String projet;
+
+	private String DTR;
+	private double runTime;
+	private String description;
+	private int nRAME;
+	private String indiceCPC;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_entree")
@@ -72,6 +80,26 @@ public class Kit {
 		this.resProduction = resProduction;
 	}
 
+	public Kit(long id, String oF, EtatKit etat, String projet, String dTR, double runTime, String description,
+			int nRAME, String indiceCPC, Date dateEntree, Date dateSortie, Set<Emplacement> emplacements,
+			ResStock resStock, ResProduction resProduction) {
+		super();
+		this.id = id;
+		OF = oF;
+		this.etat = etat;
+		this.projet = projet;
+		DTR = dTR;
+		this.runTime = runTime;
+		this.description = description;
+		this.nRAME = nRAME;
+		this.indiceCPC = indiceCPC;
+		this.dateEntree = dateEntree;
+		this.dateSortie = dateSortie;
+		this.emplacements = emplacements;
+		this.resStock = resStock;
+		this.resProduction = resProduction;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -102,6 +130,46 @@ public class Kit {
 
 	public void setProjet(String projet) {
 		this.projet = projet;
+	}
+
+	public String getDTR() {
+		return DTR;
+	}
+
+	public void setDTR(String dTR) {
+		DTR = dTR;
+	}
+
+	public double getRunTime() {
+		return runTime;
+	}
+
+	public void setRunTime(double runTime) {
+		this.runTime = runTime;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getnRAME() {
+		return nRAME;
+	}
+
+	public void setnRAME(int nRAME) {
+		this.nRAME = nRAME;
+	}
+
+	public String getIndiceCPC() {
+		return indiceCPC;
+	}
+
+	public void setIndiceCPC(String indiceCPC) {
+		this.indiceCPC = indiceCPC;
 	}
 
 	public Date getDateEntree() {
@@ -146,9 +214,17 @@ public class Kit {
 
 	@Override
 	public String toString() {
-		return "Kit [id=" + id + ", OF=" + OF + ", etat=" + etat + ", projet=" + projet + ", dateEntree=" + dateEntree
-				+ ", dateSortie=" + dateSortie + ", emplacements=" + emplacements + ", resStock=" + resStock
-				+ ", resProduction=" + resProduction + "]";
+		return "Kit [id=" + id + ", OF=" + OF + ", etat=" + etat + ", projet=" + projet + ", DTR=" + DTR + ", runTime="
+				+ runTime + ", description=" + description + ", nRAME=" + nRAME + ", indiceCPC=" + indiceCPC
+				+ ", dateEntree=" + dateEntree + ", dateSortie=" + dateSortie + ", emplacements=" + emplacements
+				+ ", resStock=" + resStock + ", resProduction=" + resProduction + "]";
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Kit [id=" + id + ", OF=" + OF + ", etat=" + etat + ", projet=" + projet + ", dateEntree=" + dateEntree
+//				+ ", dateSortie=" + dateSortie + ", emplacements=" + emplacements + ", resStock=" + resStock
+//				+ ", resProduction=" + resProduction + "]";
+//	}
 
 }

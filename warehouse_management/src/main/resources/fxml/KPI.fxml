@@ -13,28 +13,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import eu.hansolo.medusa.Gauge?>
-<!-- <?import eu.hansolo.medusa.FGauge?>
-<?import eu.hansolo.medusa.Gauge?> -->
+<!-- <?import eu.hansolo.medusa.FGauge?> <?import eu.hansolo.medusa.Gauge?> -->
 
 
-<BorderPane prefHeight="500.0" prefWidth="1100.0"
+<BorderPane maxHeight="1.7976931348623157E308"
+	maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="1100.0"
 	xmlns="http://javafx.com/javafx/11.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.alstom.controller.KPI">
 	<center>
-		<VBox prefHeight="500.0" prefWidth="1100.0"
+		<VBox prefHeight="500.0" prefWidth="1100.0" alignment="CENTER"
 			BorderPane.alignment="CENTER">
 			<children>
-				<HBox prefHeight="250.0" prefWidth="1100.0">
+				<HBox minHeight="250.0" minWidth="1100.0" alignment="CENTER"
+					VBox.vgrow="ALWAYS">
 					<children>
-						<HBox prefHeight="250.0" prefWidth="550.0">
+						<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER"
+							VBox.vgrow="ALWAYS">
 							<children>
-								<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER">
+								<HBox prefHeight="250.0" prefWidth="550.0"
+									alignment="CENTER">
 									<children>
-										<!-- <PieChart fx:id="chart_stock" prefHeight="208.0"
-											prefWidth="293.0" /> 
-										 -->
-									<Gauge fx:id="chart_stock2"/>
+										<!-- <PieChart fx:id="chart_stock" prefHeight="208.0" prefWidth="293.0" 
+											/> -->
+										<Gauge fx:id="chart_stock2" />
 									</children>
 								</HBox>
 							</children>
@@ -121,13 +123,14 @@
 						</VBox>
 					</children>
 				</HBox>
-				<HBox prefHeight="250.0" prefWidth="1100.0">
+				<HBox minHeight="250.0" minWidth="1100.0" alignment="CENTER"
+					VBox.vgrow="ALWAYS">
 					<children>
 						<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER">
 							<children>
-								<PieChart fx:id="chart_projet" prefHeight="208.0"
-									prefWidth="293.0" />
-								
+								<PieChart fx:id="chart_projet" minHeight="300.0"
+									minWidth="300.0" />
+
 							</children>
 						</HBox>
 						<HBox prefHeight="250.0" prefWidth="550.0">

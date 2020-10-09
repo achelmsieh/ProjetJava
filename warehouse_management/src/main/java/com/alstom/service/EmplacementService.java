@@ -20,7 +20,7 @@ public class EmplacementService {
 		} catch (Exception e) {
 			System.err.println(e);
 			return null;
-		
+
 		}
 	}
 
@@ -33,23 +33,22 @@ public class EmplacementService {
 		} catch (Exception e) {
 			System.err.println(e);
 			return null;
-			
+
 		}
-		
+
 	}
 
 	public List<Emplacement> getAllZoneEmplacements(String zone) {
-		List<Emplacement> empRslt = null;
 		Query query = em.createQuery(
-				"SELECT e FROM Emplacement e WHERE SUBSTRING(e.coordonnee, 1, 1)=:coord ORDER BY e.coordonnee");
-		query.setParameter("coord", zone);
+				"SELECT e FROM Emplacement e WHERE e.coordonnee LIKE :coord ORDER BY e.coordonnee");
+		query.setParameter("coord", zone + "%");
 
 		try {
-			empRslt = query.getResultList();
+			return query.getResultList();
 		} catch (Exception e) {
 			System.err.println(e);
+			return null;
 		}
-		return empRslt;
 	}
 
 	public Long countAllEmplacement() {

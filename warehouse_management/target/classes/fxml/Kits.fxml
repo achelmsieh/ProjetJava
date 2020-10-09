@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -13,18 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="500.0" minWidth="1100.0"
-	xmlns="http://javafx.com/javafx/8.0.171"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="com.alstom.controller.Kits">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alstom.controller.Kits">
 	<left>
-		<VBox minWidth="240.0" BorderPane.alignment="CENTER">
+		<VBox maxWidth="1.7976931348623157E308" minWidth="240.0" BorderPane.alignment="CENTER">
 			<children>
-				<HBox prefHeight="100.0" prefWidth="200.0">
+				<HBox alignment="CENTER" prefHeight="50.0" prefWidth="240.0">
 					<children>
-						<TextField fx:id="search_field" prefHeight="40.0"
-							prefWidth="300.0" promptText="OF....">
+						<TextField fx:id="search_field" prefHeight="40.0" prefWidth="300.0" promptText="OF....">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -35,11 +31,13 @@
 								<Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
 							</padding>
 						</TextField>
-						<ImageView onMouseClicked="#Refresh" fitHeight="43.0"
-							fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="23.0" fitWidth="23.0" onMouseClicked="#Refresh" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../icons/refresh.png" />
 							</image>
+							<HBox.margin>
+								<Insets left="10.0" />
+							</HBox.margin>
 						</ImageView>
 					</children>
 				</HBox>
@@ -47,9 +45,7 @@
 					<children>
 						<VBox alignment="CENTER">
 							<children>
-								<ImageView fitHeight="100.0" fitWidth="100.0"
-									onMouseClicked="#sortirKit" pickOnBounds="true"
-									preserveRatio="true">
+								<ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#sortirKit" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@../icons/out.png" />
 									</image>
@@ -59,9 +55,7 @@
 						</VBox>
 						<VBox alignment="CENTER">
 							<children>
-								<ImageView fitHeight="100.0" fitWidth="100.0"
-									onMouseClicked="#ajouterKit" pickOnBounds="true"
-									preserveRatio="true">
+								<ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#ajouterKit" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@../icons/in.png" />
 									</image>
@@ -73,15 +67,18 @@
 				</HBox>
 				<VBox VBox.vgrow="ALWAYS">
 					<children>
-						<JFXToggleButton fx:id="sortieBtn"
-							onAction="#filterSortie" text="Sortie" />
-						<JFXToggleButton fx:id="enStockBtn"
-							onAction="#filterEnStock" text="En stock" />
+						<JFXToggleButton fx:id="sortieBtn" onAction="#filterSortie" text="Sortie" />
+						<JFXToggleButton fx:id="enStockBtn" onAction="#filterEnStock" text="En stock" />
 					</children>
 					<padding>
 						<Insets bottom="20.0" left="50.0" right="20.0" top="20.0" />
 					</padding>
 				</VBox>
+            <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="70.0">
+               <children>
+                  <JFXButton maxWidth="1.7976931348623157E308" onAction="#uploadPlanning" prefHeight="50.0" style="-fx-background-color: #1F8FE8;" text="Charger Planning" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
 			</children>
 			<BorderPane.margin>
 				<Insets right="20.0" />
@@ -89,21 +86,21 @@
 		</VBox>
 	</left>
 	<center>
-		<TableView fx:id="table_of" minWidth="800.0"
-			BorderPane.alignment="CENTER">
+		<TableView fx:id="table_of" minWidth="800.0" BorderPane.alignment="CENTER">
 			<columns>
-				<TableColumn fx:id="colone_of" maxWidth="-Infinity"
-					minWidth="130.0" prefWidth="-1.0" text="OF" />
-				<TableColumn fx:id="zone_colone" maxWidth="-1.0"
-					minWidth="90.0" prefWidth="-1.0" text="Zone" />
-				<TableColumn fx:id="colone_projet" maxWidth="-Infinity"
-					minWidth="160.0" prefWidth="-1.0" text="Projet" />
-				<TableColumn fx:id="colone_etats" maxWidth="-1.0"
-					minWidth="120.0" prefWidth="-1.0" text="Etats" />
-				<TableColumn fx:id="date_entre" maxWidth="-Infinity"
-					minWidth="150.0" prefWidth="-1.0" text="Date d'entrée" />
-				<TableColumn fx:id="date_sortie" maxWidth="-Infinity"
-					minWidth="150.0" prefWidth="-1.0" text="Date de sortie" />
+				<TableColumn fx:id="col_of" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" text="OF" />
+				<TableColumn fx:id="col_emplacement" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="-1.0" text="Emplacement" />
+				<TableColumn fx:id="col_projet" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" text="Projet" />
+				<TableColumn fx:id="col_etat" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Etat" />
+				<TableColumn fx:id="col_date_entree" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="-1.0" text="Date d'entrée" />
+				<TableColumn fx:id="col_date_sortie" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="-1.0" text="Date de sortie" />
+				<TableColumn fx:id="col_res_prod" maxWidth="1.7976931348623157E308" minWidth="135.0" prefWidth="-1.0" text="Responsable Prod" />
+				<TableColumn fx:id="col_res_stock" maxWidth="1.7976931348623157E308" minWidth="135.0" prefWidth="-1.0" text="Responsable Stock" />
+				<TableColumn fx:id="col_run_time" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Run Time" />
+				<TableColumn fx:id="col_dtr" maxWidth="1.7976931348623157E308" minWidth="135.0" prefWidth="-1.0" text="DTR" />
+				<TableColumn fx:id="col_description" maxWidth="1.7976931348623157E308" minWidth="300.0" prefWidth="-1.0" text="Description" />
+				<TableColumn fx:id="col_nrame" maxWidth="1.7976931348623157E308" minWidth="135.0" prefWidth="-1.0" text="N° RAME" />
+				<TableColumn fx:id="col_indice_cpc" maxWidth="1.7976931348623157E308" minWidth="135.0" prefWidth="-1.0" text="indice CPC" />
 			</columns>
 		</TableView>
 	</center>

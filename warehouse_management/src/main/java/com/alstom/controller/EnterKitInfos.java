@@ -1,0 +1,15 @@
+package com.alstom.controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.Initializable;
+
+public class EnterKitInfos implements Initializable {
+
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+	}
+
+}

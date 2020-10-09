@@ -22,8 +22,8 @@ public class UserSession {
 		return instance.user;
 	}
 
-	public void cleanUserSession() {
-		user = null;
+	public static void cleanUserSession() {
+		instance.user = null;
 	}
 
 	@Override

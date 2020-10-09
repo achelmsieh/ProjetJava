@@ -27,17 +27,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class Personnels implements Initializable {
 
-	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
 	@FXML
 	private VBox VboxAdd;
 	@FXML
@@ -49,33 +43,25 @@ public class Personnels implements Initializable {
 
 	@FXML
 	private Label IdLabel;
-
 	@FXML
 	private Label NomLabel;
-
 	@FXML
 	private TableView<Kit> KitTable;
-
 	@FXML
 	private TableColumn<Kit, String> OfColumn;
-
 	@FXML
 	private TableColumn<Kit, String> ProjetColumn;
-
 	@FXML
 	private TableColumn<Kit, String> dateEntreeColumn;
-
 	@FXML
 	private TableColumn<Kit, String> dateSortieColumn;
 
 	ResProductionService prs = new ResProductionService();
 	KitService kits = new KitService();
 	private final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd   hh:mm");
-	List<ResProduction> c;
 
 	@FXML
-
-	void AjoutterRes(MouseEvent event) {
+	void AjouterRes(MouseEvent event) {
 		if (!VboxAdd.isVisible()) {
 			setVisibility(VboxAdd, true);
 			setVisibility(VboxSelect, false);
@@ -92,18 +78,21 @@ public class Personnels implements Initializable {
 			ResProduction res = new ResProduction();
 			res.setNom(NomRes.getText());
 			prs.save(res);
+
 			Combo.getItems().addAll(res);
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setContentText("Responsable Ajoutée");
-			alert.show();
+			showAlert(AlertType.INFORMATION, "Responsable Ajoutée");
+
 			setVisibility(VboxAdd, false);
 			setVisibility(VboxSelect, true);
 		} else {
-			System.out.println("ho");
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Veuillez Saisir le nom du responsable de production");
-			alert.show();
+			showAlert(AlertType.ERROR, "Veuillez Saisir le nom du responsable de production");
 		}
+	}
+
+	private void showAlert(AlertType type, String msg) {
+		Alert alert = new Alert(type);
+		alert.setContentText(msg);
+		alert.show();
 	}
 
 	@FXML
@@ -112,19 +101,19 @@ public class Personnels implements Initializable {
 		setVisibility(VboxSelect, true);
 	}
 
-	private void setVisibility(Node n, Boolean etat) {
-		n.setVisible(etat);
-		n.managedProperty().bind(n.visibleProperty());
+	private void setVisibility(Node node, Boolean etat) {
+		node.setVisible(etat);
+		node.managedProperty().bind(node.visibleProperty());
 	}
 
 	@FXML
-	void AchtionCombo(ActionEvent event) {
+	void ActionCombo(ActionEvent event) {
 
 		IdLabel.setText("ID : " + Combo.getValue().getId());
 		NomLabel.setText("Nom : " + Combo.getValue().getNom());
+
 		List<Kit> list = kits.getKitByIdRes(Combo.getValue());
 		ObservableList<Kit> kits = FXCollections.observableArrayList(list);
-//		 table_of.setItems(kits);
 		KitTable.setItems(kits);
 		KitTable.refresh();
 
@@ -132,10 +121,22 @@ public class Personnels implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		c = new ArrayList<>();
-		prs.getResProduction().stream().forEach(e -> c.add(e));
-		Combo.getItems().addAll(c);
-		ProjetColumn.setCellValueFactory(cellDataFeatures -> new SimpleStringProperty(cellDataFeatures.getValue().getProjet()));
+		initCombo();
+		initKitTableCols();
+
+		setVisibility(VboxAdd, false);
+	}
+
+	private void initCombo() {
+		List<ResProduction> respos = new ArrayList<>();
+		prs.getResProduction().stream().forEach(e -> respos.add(e));
+		Combo.getItems().addAll(respos);
+	}
+
+	private void initKitTableCols() {
+		OfColumn.setCellValueFactory(cellDataFeatures -> new SimpleStringProperty(cellDataFeatures.getValue().getOF()));
+		ProjetColumn.setCellValueFactory(
+				cellDataFeatures -> new SimpleStringProperty(cellDataFeatures.getValue().getProjet()));
 
 		dateEntreeColumn.setCellValueFactory(cellDataFeatures -> new SimpleStringProperty(
 				dateFormat.format(cellDataFeatures.getValue().getDateEntree())));
@@ -143,8 +144,5 @@ public class Personnels implements Initializable {
 			Date ds = cellDataFeatures.getValue().getDateSortie();
 			return new SimpleStringProperty(ds == null ? "" : dateFormat.format(ds));
 		});
-		OfColumn.setCellValueFactory(cellDataFeatures -> new SimpleStringProperty(cellDataFeatures.getValue().getOF()));
-		setVisibility(VboxAdd, false);
-
 	}
 }

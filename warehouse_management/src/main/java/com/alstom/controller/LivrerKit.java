@@ -1,8 +1,6 @@
 package com.alstom.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -12,6 +10,7 @@ import com.alstom.model.Kit;
 import com.alstom.model.ResProduction;
 import com.alstom.service.KitService;
 import com.alstom.service.ResProductionService;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 
 import javafx.application.Platform;
@@ -24,10 +23,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class LivrerKit implements Initializable {
 
@@ -43,6 +45,8 @@ public class LivrerKit implements Initializable {
 	private TableColumn<Kit, String> colone_corodonne;
 	@FXML
 	private TableColumn<Kit, String> colone_projet;
+	@FXML
+	private TableColumn<Kit, String> colone_supprimer;
 
 	ObservableList<Kit> rows = FXCollections.observableArrayList();
 	KitService kitService = new KitService();
@@ -53,6 +57,9 @@ public class LivrerKit implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		initCols();
 
+		if (Kits.selectedKit != null)
+			rows.add(Kits.selectedKit);
+
 		table_of_zone.setItems(rows);
 
 		of_text.requestFocus();
@@ -61,9 +68,7 @@ public class LivrerKit implements Initializable {
 				Platform.runLater(() -> search());
 		});
 
-		List<ResProduction> c = new ArrayList<>();
-		prs.getResProduction().stream().forEach(e -> c.add(e));
-		Combo.getItems().addAll(c);
+		Combo.getItems().addAll(prs.getResProduction());
 	}
 
 	private void initCols() {
@@ -80,19 +85,55 @@ public class LivrerKit implements Initializable {
 			else
 				return new SimpleStringProperty("");
 		});
+
+		Callback<TableColumn<Kit, String>, TableCell<Kit, String>> cellFactory = new Callback<TableColumn<Kit, String>, TableCell<Kit, String>>() {
+			@Override
+			public TableCell<Kit, String> call(TableColumn<Kit, String> param) {
+				final TableCell<Kit, String> cell = new TableCell<Kit, String>() {
+
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							ImageView img = new ImageView("icons/trash.png");
+							img.setFitWidth(35);
+							img.setFitHeight(35);
+							JFXButton btn = new JFXButton();
+							btn.setGraphic(img);
+
+							btn.setOnAction(event -> {
+								Kit kit = getTableView().getItems().get(getIndex());
+								rows.remove(kit);
+							});
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+
+		colone_supprimer.setCellFactory(cellFactory);
 	}
 
 	void search() {
+		Kit k = rows.stream().filter(item -> item.getOF().equals(of_text.getText())).findFirst().orElse(null);
+		if (k != null) {
+			showErrorAlert("OF: " + of_text.getText() + " est déjà dans la liste");
+			of_text.clear();
+			return;
+		}
+
 		Kit kit = kitService.getKitByOF(of_text.getText());
 		if (kit == null) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("OF: " + of_text.getText() + " n'existe pas");
-			alert.show();
+			showErrorAlert("OF: " + of_text.getText() + " n'existe pas");
 		} else {
 			if (kit.getEtat() == EtatKit.SORTIE) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setContentText("OF : " + of_text.getText() + " est déja livrer");
-				alert.show();
+				showErrorAlert("OF : " + of_text.getText() + " est déja livrer");
 			} else {
 				rows.add(kit);
 				table_of_zone.setItems(rows);
@@ -110,11 +151,15 @@ public class LivrerKit implements Initializable {
 			});
 			fermerFenetre(event);
 		} else {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Veuillez selectionner un Responsable de production");
-			alert.show();
+			showErrorAlert("Veuillez selectionner un Responsable de production");
 
 		}
+	}
+
+	private void showErrorAlert(String text) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setContentText(text);
+		alert.show();
 	}
 
 	@FXML

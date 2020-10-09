@@ -13,7 +13,10 @@ import java.util.stream.Collectors;
 import com.alstom.model.Emplacement;
 import com.alstom.model.EtatKit;
 import com.alstom.model.Kit;
+import com.alstom.model.ResProduction;
+import com.alstom.model.ResStock;
 import com.alstom.service.KitService;
+import com.alstom.util.FileUploader;
 import com.alstom.util.FxmlView;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -24,12 +27,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -47,49 +51,128 @@ public class Kits implements Initializable {
 	@FXML
 	TableView<Kit> table_of;
 	@FXML
-	TableColumn<Kit, String> colone_of;
+	private TableColumn<Kit, String> col_of;
 	@FXML
-	TableColumn<Kit, String> colone_projet;
+	private TableColumn<Kit, String> col_emplacement;
 	@FXML
-	TableColumn<Kit, String> colone_etats;
+	private TableColumn<Kit, String> col_projet;
 	@FXML
-	TableColumn<Kit, String> date_entre;
+	private TableColumn<Kit, String> col_etat;
 	@FXML
-	TableColumn<Kit, String> date_sortie;
+	private TableColumn<Kit, String> col_date_entree;
 	@FXML
-	TableColumn<Kit, String> zone_colone;
+	private TableColumn<Kit, String> col_date_sortie;
+	@FXML
+	private TableColumn<Kit, String> col_res_prod;
+	@FXML
+	private TableColumn<Kit, String> col_res_stock;
+	@FXML
+	private TableColumn<Kit, String> col_run_time;
+	@FXML
+	private TableColumn<Kit, String> col_dtr;
+	@FXML
+	private TableColumn<Kit, String> col_description;
+	@FXML
+	private TableColumn<Kit, String> col_nrame;
+	@FXML
+	private TableColumn<Kit, String> col_indice_cpc;
 
 	private KitService kms = new KitService();
 	private final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd   hh:mm");
+
+	public static Kit selectedKit = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initToggleButtons();
 		initCols();
+		setDoubleClickEvent();
 		initSearchField();
 	}
 
 	private void initCols() {
-		colone_of.setCellValueFactory(new PropertyValueFactory<Kit, String>("OF"));
-		colone_etats.setCellValueFactory(new PropertyValueFactory<Kit, String>("etat"));
-		colone_projet.setCellValueFactory(new PropertyValueFactory<Kit, String>("projet"));
 
-		date_entre.setCellValueFactory(cellDataFeatures -> new SimpleStringProperty(
-				dateFormat.format(cellDataFeatures.getValue().getDateEntree())));
-		date_sortie.setCellValueFactory(cellDataFeatures -> {
-			Date ds = cellDataFeatures.getValue().getDateSortie();
+//		table_of.setColumnResizePolicy((param) -> true);
+//		Platform.runLater(() -> customResize(table_of));
+
+		col_of.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getOF()));
+		col_etat.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getEtat().toString()));
+		col_projet.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getProjet()));
+		col_dtr.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getDTR()));
+		col_run_time.setCellValueFactory(cdf -> new SimpleStringProperty(String.valueOf(cdf.getValue().getRunTime())));
+		col_description.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getDescription()));
+		col_nrame.setCellValueFactory(cdf -> new SimpleStringProperty(String.valueOf(cdf.getValue().getnRAME())));
+		col_indice_cpc.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getIndiceCPC()));
+
+		col_date_entree.setCellValueFactory(
+				cdf -> new SimpleStringProperty(dateFormat.format(cdf.getValue().getDateEntree())));
+		col_date_sortie.setCellValueFactory(cdf -> {
+			Date ds = cdf.getValue().getDateSortie();
 			return new SimpleStringProperty(ds == null ? "" : dateFormat.format(ds));
 		});
 
-		zone_colone.setCellValueFactory(cellDataFeatures -> {
-			if (cellDataFeatures.getValue().getEmplacements() != null)
-				return new SimpleStringProperty(cellDataFeatures.getValue().getEmplacements().stream()
+		col_emplacement.setCellValueFactory(cdf -> {
+			if (cdf.getValue().getEmplacements() != null)
+				return new SimpleStringProperty(cdf.getValue().getEmplacements().stream()
 						.map(Emplacement::getCoordonnee).collect(Collectors.joining("\n")));
 			else
 				return new SimpleStringProperty("");
 		});
 
+		col_res_stock.setCellValueFactory(cdf -> {
+			ResStock rs = cdf.getValue().getResStock();
+			return new SimpleStringProperty(rs == null ? "" : rs.getNom());
+		});
+
+		col_res_prod.setCellValueFactory(cdf -> {
+			ResProduction rp = cdf.getValue().getResProduction();
+			return new SimpleStringProperty(rp == null ? "" : rp.getNom());
+		});
+
 		setTableItems(kms.getKits());
+	}
+
+//	public void customResize(TableView<?> view) {
+//
+//		AtomicLong width = new AtomicLong();
+//		view.getColumns().forEach(col -> {
+//			width.addAndGet((long) col.getWidth());
+//		});
+//		double tableWidth = view.getWidth();
+//
+//		if (tableWidth > width.get()) {
+//			view.getColumns().forEach(col -> {
+//				col.setPrefWidth(col.getWidth() + ((tableWidth - width.get()) / view.getColumns().size()));
+//			});
+//		}
+//	}
+
+	private void setDoubleClickEvent() {
+		table_of.setRowFactory(tableView -> {
+			TableRow<Kit> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 1 && (!row.isEmpty())) {
+					Kit k = tableView.getSelectionModel().getSelectedItem();
+					if (k != null && k.getEtat() != EtatKit.SORTIE) {
+						selectedKit = k;
+						showWindow(FxmlView.DETAILS_KITS, "Coupure - Détails du Kit");
+					}
+				}
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					Kit k = tableView.getSelectionModel().getSelectedItem();
+					if (k != null && k.getEtat() != EtatKit.SORTIE) {
+						selectedKit = k;
+						showWindow(FxmlView.LIVRER_KIT, "Coupure - Livrer Kit");
+					}
+//					else {
+//						Alert alert = new Alert(AlertType.ERROR);
+//						alert.setContentText("cette OF est déja livrer");
+//						alert.show();
+//					}
+				}
+			});
+			return row;
+		});
 	}
 
 	private void initSearchField() {
@@ -167,6 +250,12 @@ public class Kits implements Initializable {
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setTitle(title);
 			stage.setScene(scene);
+
+			stage.setOnHiding(e -> {
+				selectedKit = null;
+				search("");
+			});
+
 			stage.show();
 
 		} catch (IOException e) {
@@ -187,5 +276,11 @@ public class Kits implements Initializable {
 	@FXML
 	void Refresh(MouseEvent event) {
 		search("");
+	}
+
+	@FXML
+	void uploadPlanning(ActionEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FileUploader.upload(stage);
 	}
 }
