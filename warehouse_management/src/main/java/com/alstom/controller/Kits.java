@@ -80,7 +80,7 @@ public class Kits implements Initializable {
 	private KitService kms = new KitService();
 	private final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd   hh:mm");
 
-	public static Kit selectedKit = null;
+	public Kit selectedKit = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -91,10 +91,6 @@ public class Kits implements Initializable {
 	}
 
 	private void initCols() {
-
-//		table_of.setColumnResizePolicy((param) -> true);
-//		Platform.runLater(() -> customResize(table_of));
-
 		col_of.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getOF()));
 		col_etat.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getEtat().toString()));
 		col_projet.setCellValueFactory(cdf -> new SimpleStringProperty(cdf.getValue().getProjet()));
@@ -132,44 +128,26 @@ public class Kits implements Initializable {
 		setTableItems(kms.getKits());
 	}
 
-//	public void customResize(TableView<?> view) {
-//
-//		AtomicLong width = new AtomicLong();
-//		view.getColumns().forEach(col -> {
-//			width.addAndGet((long) col.getWidth());
-//		});
-//		double tableWidth = view.getWidth();
-//
-//		if (tableWidth > width.get()) {
-//			view.getColumns().forEach(col -> {
-//				col.setPrefWidth(col.getWidth() + ((tableWidth - width.get()) / view.getColumns().size()));
-//			});
-//		}
-//	}
-
 	private void setDoubleClickEvent() {
 		table_of.setRowFactory(tableView -> {
 			TableRow<Kit> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 1 && (!row.isEmpty())) {
-					Kit k = tableView.getSelectionModel().getSelectedItem();
-					if (k != null && k.getEtat() != EtatKit.SORTIE) {
-						selectedKit = k;
-						showWindow(FxmlView.DETAILS_KITS, "Coupure - Détails du Kit");
-					}
-				}
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
-					Kit k = tableView.getSelectionModel().getSelectedItem();
-					if (k != null && k.getEtat() != EtatKit.SORTIE) {
-						selectedKit = k;
-						showWindow(FxmlView.LIVRER_KIT, "Coupure - Livrer Kit");
-					}
+					selectedKit = tableView.getSelectionModel().getSelectedItem();
+					showWindow(FxmlView.DETAILS_KITS, "Coupure - Détails du Kit");
+				}
+//				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+//					Kit k = tableView.getSelectionModel().getSelectedItem();
+//					if (k != null && k.getEtat() != EtatKit.SORTIE) {
+//						selectedKit = k;
+//						showWindow(FxmlView.LIVRER_KIT, "Coupure - Livrer Kit");
+//					}
 //					else {
 //						Alert alert = new Alert(AlertType.ERROR);
 //						alert.setContentText("cette OF est déja livrer");
 //						alert.show();
 //					}
-				}
+//				}
 			});
 			return row;
 		});
@@ -242,6 +220,11 @@ public class Kits implements Initializable {
 		try {
 
 			borderpane = loader.load();
+
+			Object controller = loader.getController();
+			if (controller instanceof DetailsKit)
+				((DetailsKit) controller).setDate(selectedKit, false);
+
 			Stage stage = new Stage();
 			Scene scene = new Scene(borderpane);
 
@@ -252,11 +235,10 @@ public class Kits implements Initializable {
 			stage.setScene(scene);
 
 			stage.setOnHiding(e -> {
-				selectedKit = null;
 				search("");
 			});
 
-			stage.show();
+			stage.showAndWait();
 
 		} catch (IOException e) {
 			e.printStackTrace();

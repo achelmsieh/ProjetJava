@@ -1,6 +1,7 @@
 package com.alstom.application;
 
 import com.alstom.connection.EntityManagerInitializer;
+import com.alstom.service.AppInitializer;
 import com.alstom.util.FxmlView;
 
 import javafx.application.Application;

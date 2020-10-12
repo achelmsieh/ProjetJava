@@ -1,5 +1,6 @@
 package com.alstom.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,12 +10,14 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.alstom.controller.AskForKitDetails.KitDetailsAction;
 import com.alstom.model.Emplacement;
 import com.alstom.model.EtatKit;
 import com.alstom.model.Kit;
 import com.alstom.service.EmplacementService;
 import com.alstom.service.KitService;
 import com.alstom.util.ExcelDataReader;
+import com.alstom.util.FxmlView;
 import com.alstom.util.UserSession;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -25,8 +28,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableCell;
@@ -35,7 +40,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -191,7 +198,6 @@ public class AjouterKit implements Initializable {
 		Layout_multi.setVisible(!etat);
 		Layout_simple.managedProperty().bind(Layout_simple.visibleProperty());
 		Layout_multi.managedProperty().bind(Layout_multi.visibleProperty());
-
 	}
 
 	private void initFields() {
@@ -320,19 +326,109 @@ public class AjouterKit implements Initializable {
 	@FXML
 	void validerSelection(ActionEvent event) {
 		rows = table_of_zone.getItems();
-		Set<Kit> list = new HashSet<Kit>();
-		rows.stream().forEach(e -> {
-			if (e.getProjet() == null || e.getProjet().isEmpty())
-				askForInfos();
-			list.add(e);
-		});
-		kitService.save(list);
+
+		Set<Kit> sk = getValidateRows(null, rows);
+		kitService.save(sk);
 
 		fermerFenetre(event);
 	}
 
-	private void askForInfos() {
-		System.out.println("enter the data plz !");
+	private Set<Kit> getValidateRows(HashSet<Kit> validatedSet, ObservableList<Kit> list) {
+
+		if (list == null || list.isEmpty())
+			return validatedSet;
+
+		if (validatedSet == null)
+			validatedSet = (HashSet<Kit>) list.stream().filter(kit -> kit.getProjet() != null)
+					.collect(Collectors.toSet());
+
+		Kit kit2V = list.get(0);
+
+		if (kit2V.getProjet() == null || kit2V.getProjet().isEmpty()) {
+			askForInfos(kit2V);
+			if (recievedKit == null) {
+				list.remove(0);
+				return getValidateRows(validatedSet, list);
+			}
+
+			kit2V = recievedKit;
+		}
+
+		list.remove(0);
+		validatedSet.add(kit2V);
+		return getValidateRows(validatedSet, list);
+	}
+
+	private void askForInfos(Kit kit) {
+		showWindow(FxmlView.ASK_KIT_DETAILS, "Coupure - Manque de données", kit);
+	}
+
+	private Kit recievedKit = null;
+
+	private void RecievedAction(KitDetailsAction kda) {
+		if (kda == null)
+			return;
+
+		switch (kda.getActionType()) {
+		case FILE:
+			System.out.println("Fiiiiiile");
+			try {
+				Kit sk = kda.getKit(); // searched Kit
+				recievedKit = ExcelDataReader.getKitInfos(sk.getOF()); // result kit
+				recievedKit.setOF(sk.getOF());
+				recievedKit.setDateEntree(new Date());
+				recievedKit.setEtat(EtatKit.ENSTOCK);
+				recievedKit.setResStock(UserSession.getUser());
+				recievedKit.setEmplacements(sk.getEmplacements());
+
+				return;
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			break;
+		case MANUEL:
+			System.out.println("Maaan");
+			recievedKit = kda.getKit();
+			break;
+		case CONTINUE:
+			System.out.println("Connn");
+			recievedKit = kda.getKit();
+			break;
+		case RETIRE:
+		default:
+			recievedKit = null;
+			break;
+		}
+
+	}
+
+	private void showWindow(FxmlView window, String title, Kit kit) {
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(window.getFxmlFile()));
+		BorderPane borderpane;
+		try {
+
+			borderpane = loader.load();
+
+			AskForKitDetails controller = loader.getController();
+			controller.setCurrentKit(kit);
+
+			Stage stage = new Stage();
+			Scene scene = new Scene(borderpane);
+
+			stage.setResizable(false);
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setTitle(title);
+			stage.setScene(scene);
+			Kit k = null;
+			stage.setOnHiding(e -> {
+				RecievedAction(controller.getActionResult());
+			});
+
+			stage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
