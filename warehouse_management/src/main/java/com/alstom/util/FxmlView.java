@@ -28,20 +28,6 @@ public enum FxmlView {
 			return rootPath + "Kits.fxml";
 		}
 	},
-	DETAILS_KITS {
-
-		@Override
-		public String getFxmlFile() {
-			return rootPath + "DetailsKit.fxml";
-		}
-	},
-	ASK_KIT_DETAILS {
-
-		@Override
-		public String getFxmlFile() {
-			return rootPath + "AskForKitDetails.fxml";
-		}
-	},
 	PERSONNELS {
 
 		@Override

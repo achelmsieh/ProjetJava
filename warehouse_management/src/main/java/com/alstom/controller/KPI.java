@@ -74,14 +74,8 @@ public class KPI implements Initializable {
 		double percentocuppe = (double) countOccupeEmplacement / (double) countAllEmplacement;
 		ObservableList<PieChart.Data> pieChartData1 = FXCollections.observableArrayList(
 				new PieChart.Data("Free", percentfree), new PieChart.Data("Ocuppé", percentocuppe));
-//		ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList(
-//				new PieChart.Data("Projet3", 60), new PieChart.Data("Projet2", 25), new PieChart.Data("Projet1", 15));
-
-		Map<String, Long> mapProj = kits.getKits().stream().collect(
-				Collectors.groupingBy(k -> k.getProjet() != null ? k.getProjet() : "autres", Collectors.counting()));
-		ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList();
-		mapProj.forEach((k, v) -> pieChartData2.add(new PieChart.Data(k + " [" + v + "]", v)));
-
+		ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList(
+				new PieChart.Data("Projet3", 60), new PieChart.Data("Projet2", 25), new PieChart.Data("Projet1", 15));
 		nombre_stock.setText("  " + Long.toString(kpis.getKitsEnStockCount()) + " OF.");
 		nombre_sortie.setText("  " + Long.toString(kpis.getKitsCount() - kpis.getKitsEnStockCount()) + " OF.");
 

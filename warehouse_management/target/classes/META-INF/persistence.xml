@@ -1,54 +1,27 @@
+
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-
-	<persistence-unit name="GscUnit">
+	<persistence-unit name="GscUnit"
+		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
 		<properties>
-			<property name="dialect"
-				value="org.hibernate.dialect.SQLiteDialect" />
-
-			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.connection.driver_class"
+				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:sqlserver://192.168.1.4\SERVERACHRAF;databaseName=stock_coupuredb;" />
+			<property name="hibernate.connection.username"
+				value="achraf2" />
+			<property name="hibernate.connection.password"
+				value="azerty" />
 			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="false" />
-			<property name="javax.persistence.jdbc.driver"
-				value="org.sqlite.JDBC" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:sqlite:C:/Users/YouSsef/Desktop/ALSTOM/warehouse_management/DB/wmDB.db" />
-
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.SQLServerDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>
-
-
-
-
-<!-- <persistence xmlns="http://java.sun.com/xml/ns/persistence" -->
-<!-- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" -->
-<!-- xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" -->
-<!-- version="2.0"> -->
-<!-- <persistence-unit name="GscUnit" -->
-<!-- transaction-type="RESOURCE_LOCAL"> -->
-<!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
-<!-- <properties> -->
-<!-- <property name="hibernate.connection.driver_class" -->
-<!-- value="com.microsoft.sqlserver.jdbc.SQLServerDriver" /> -->
-<!-- <property name="hibernate.connection.url" -->
-<!-- value="jdbc:sqlserver://192.168.1.4\SERVERACHRAF;databaseName=stock_coupuredb;" 
-	/> -->
-<!-- <property name="hibernate.connection.username" -->
-<!-- value="achraf2" /> -->
-<!-- <property name="hibernate.connection.password" -->
-<!-- value="azerty" /> -->
-<!-- <property name="hibernate.show_sql" value="true" /> -->
-<!-- <property name="hibernate.dialect" -->
-<!-- value="org.hibernate.dialect.SQLServerDialect" /> -->
-<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
-<!-- </properties> -->
-<!-- </persistence-unit> -->
-<!-- </persistence> -->
 
 
 

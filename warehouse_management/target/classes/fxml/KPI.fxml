@@ -22,14 +22,12 @@
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.alstom.controller.KPI">
 	<center>
-		<VBox prefHeight="500.0" prefWidth="1100.0" alignment="CENTER"
+		<VBox prefHeight="500.0" prefWidth="1100.0"
 			BorderPane.alignment="CENTER">
 			<children>
-				<HBox minHeight="250.0" minWidth="1100.0" alignment="CENTER"
-					VBox.vgrow="ALWAYS">
+				<HBox prefHeight="250.0" prefWidth="1100.0">
 					<children>
-						<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER"
-							VBox.vgrow="ALWAYS">
+						<HBox prefHeight="250.0" prefWidth="550.0">
 							<children>
 								<HBox prefHeight="250.0" prefWidth="550.0"
 									alignment="CENTER">
@@ -123,13 +121,12 @@
 						</VBox>
 					</children>
 				</HBox>
-				<HBox minHeight="250.0" minWidth="1100.0" alignment="CENTER"
-					VBox.vgrow="ALWAYS">
+				<HBox prefHeight="250.0" prefWidth="1100.0">
 					<children>
 						<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER">
 							<children>
-								<PieChart fx:id="chart_projet" minHeight="300.0"
-									minWidth="300.0" />
+								<PieChart fx:id="chart_projet" prefHeight="208.0"
+									prefWidth="293.0" />
 
 							</children>
 						</HBox>

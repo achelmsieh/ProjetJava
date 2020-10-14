@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +14,7 @@ import javax.persistence.Table;
 public class Emplacement {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_id_sequence")
-	@SequenceGenerator(name = "emp_id_sequence", sequenceName = "EMP_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String coordonnee;

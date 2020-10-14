@@ -40,8 +40,8 @@ public class EmplacementService {
 
 	public List<Emplacement> getAllZoneEmplacements(String zone) {
 		Query query = em.createQuery(
-				"SELECT e FROM Emplacement e WHERE e.coordonnee LIKE :coord ORDER BY e.coordonnee");
-		query.setParameter("coord", zone + "%");
+				"SELECT e FROM Emplacement e WHERE SUBSTRING(e.coordonnee, 1, 1)=:coord ORDER BY e.coordonnee");
+		query.setParameter("coord", zone);
 
 		try {
 			return query.getResultList();

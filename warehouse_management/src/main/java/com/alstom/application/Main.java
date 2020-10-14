@@ -18,7 +18,6 @@ public class Main extends Application {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-
 		EntityManagerInitializer.init();
 //		AppInitializer.init();
 //		AppInitializer.fetchAllData();

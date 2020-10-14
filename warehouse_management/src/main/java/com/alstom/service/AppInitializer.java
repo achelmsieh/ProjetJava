@@ -25,10 +25,11 @@ public class AppInitializer {
 		initResStock();
 		initResProduction();
 		initEmplacements();
-//		initKits();
+		initKits();
 	}
 
 	public static void initEmplacements() {
+		System.out.println("init emplacements");
 		char[] alpha = "ABCDEFGHIJKLMN".toCharArray();
 
 		List<Emplacement> emps = new ArrayList<>();
@@ -41,14 +42,17 @@ public class AppInitializer {
 		}
 
 		es.save(emps);
+		System.out.println("init end");
 	}
 
 	public static void initResStock() {
+
 		rss.save(new ResStock("1", "1"));
 		rss.save(new ResStock("2", "2"));
 	}
 
 	public static void initResProduction() {
+
 		rps.save(new ResProduction("rp1"));
 		rps.save(new ResProduction("rp2"));
 		rps.save(new ResProduction("rp3"));

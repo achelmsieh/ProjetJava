@@ -53,11 +53,12 @@ public class LivrerKit implements Initializable {
 
 	ResProductionService prs = new ResProductionService();
 
-	private Kit startKit = null;
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initCols();
+
+		if (Kits.selectedKit != null)
+			rows.add(Kits.selectedKit);
 
 		table_of_zone.setItems(rows);
 
@@ -68,13 +69,6 @@ public class LivrerKit implements Initializable {
 		});
 
 		Combo.getItems().addAll(prs.getResProduction());
-	}
-
-	public void setStartKit(Kit kit) {
-		startKit = kit;
-		if (startKit != null)
-			rows.add(startKit);
-		table_of_zone.refresh();
 	}
 
 	private void initCols() {
@@ -126,8 +120,7 @@ public class LivrerKit implements Initializable {
 		colone_supprimer.setCellFactory(cellFactory);
 	}
 
-	private void search() {
-		// search for this kit in table rows
+	void search() {
 		Kit k = rows.stream().filter(item -> item.getOF().equals(of_text.getText())).findFirst().orElse(null);
 		if (k != null) {
 			showErrorAlert("OF: " + of_text.getText() + " est déjà dans la liste");
@@ -135,7 +128,6 @@ public class LivrerKit implements Initializable {
 			return;
 		}
 
-		// search if this kit in database
 		Kit kit = kitService.getKitByOF(of_text.getText());
 		if (kit == null) {
 			showErrorAlert("OF: " + of_text.getText() + " n'existe pas");
@@ -160,6 +152,7 @@ public class LivrerKit implements Initializable {
 			fermerFenetre(event);
 		} else {
 			showErrorAlert("Veuillez selectionner un Responsable de production");
+
 		}
 	}
 
@@ -171,7 +164,6 @@ public class LivrerKit implements Initializable {
 
 	@FXML
 	void fermerFenetre(ActionEvent event) {
-		startKit = null;
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
 	}
