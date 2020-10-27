@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308"
+	maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="1100.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.alstom.controller.DashboardKit">
+
+
+	<center>
+
+	</center>
+	<top>
+
+	</top>
+	<bottom>
+
+	</bottom>
+	<top>
+		<HBox alignment="CENTER" prefHeight="74.0" prefWidth="800.0"
+			spacing="10.0" BorderPane.alignment="CENTER">
+			<children>
+				<Label text="De :" />
+				<JFXDatePicker fx:id="Date1" />
+				<Label text="À :" />
+				<JFXDatePicker fx:id="Date2" />
+			</children>
+		</HBox>
+	</top>
+	<center>
+		<HBox alignment="CENTER" maxHeight="1.7976931348623157E308"
+			minWidth="1100.0" spacing="30.0" BorderPane.alignment="CENTER">
+			<children>
+				<VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+					<children>
+						<Label text="Kits Bloques">
+							<font>
+								<Font size="18.0" />
+							</font>
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+						</Label>
+						<TableView fx:id="BloqueTable" VBox.vgrow="ALWAYS">
+							<columns>
+								<TableColumn fx:id="OfBColumn" prefWidth="142.0"
+									text="OF" />
+								<TableColumn fx:id="ProjetBColumn" prefWidth="94.0"
+									text="Projets" />
+								<TableColumn fx:id="NombreBColumn" prefWidth="152.0"
+									text="Nombre de jours" />
+							</columns>
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+						</TableView>
+						<Label fx:id="SommeBloque" prefHeight="25.0"
+							prefWidth="65.0" text="Somme">
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+						</Label>
+					</children>
+				</VBox>
+				<VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+					<children>
+						<Label text="Kits anticipés">
+							<font>
+								<Font size="18.0" />
+							</font>
+						</Label>
+						<TableView fx:id="AnticpeTable" VBox.vgrow="ALWAYS">
+							<columns>
+								<TableColumn fx:id="OfAColumn" prefWidth="115.0"
+									text="OF" />
+								<TableColumn fx:id="ProjetAColumn" prefWidth="104.0"
+									text="Projets" />
+								<TableColumn fx:id="NombreAColumn" prefWidth="141.0"
+									text="Nombre de jours" />
+							</columns>
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+						</TableView>
+						<Label fx:id="SommeAnticipe" prefHeight="22.0"
+							prefWidth="72.0" text="Somme">
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+						</Label>
+					</children>
+				</VBox>
+			</children>
+			<BorderPane.margin>
+				<Insets left="20.0" right="20.0" />
+			</BorderPane.margin>
+			<padding>
+				<Insets bottom="20.0" />
+			</padding>
+		</HBox>
+	</center>
+</BorderPane>

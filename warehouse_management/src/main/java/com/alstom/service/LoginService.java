@@ -4,17 +4,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.alstom.connection.EntityManagerInitializer;
-import com.alstom.model.ResStock;
+import com.alstom.model.Personnel;
+import com.alstom.model.enums.PersonnelRole;
 
 public class LoginService {
 
-	public ResStock connecting(String username, String password) {
-		ResStock rslt = null;
+	public Personnel connecting(String username, String password) {
+		Personnel rslt = null;
 		EntityManager em = EntityManagerInitializer.getEntityManager();
 
-		TypedQuery<ResStock> query = em
-				.createQuery("SELECT c FROM ResStock c WHERE c.nom = :nom AND c.motDePasse = :pass", ResStock.class);
-		query.setParameter("nom", username);
+		TypedQuery<Personnel> query = em.createQuery(
+				"SELECT p FROM Personnel p WHERE (p.role = :admin OR p.role = :res_stock) AND p.matricule = :matricule AND p.motDePasse = :pass",
+				Personnel.class);
+		query.setParameter("admin", PersonnelRole.ADMIN);
+		query.setParameter("res_stock", PersonnelRole.RES_STOCK);
+		query.setParameter("matricule", username);
 		query.setParameter("pass", password);
 
 		try {

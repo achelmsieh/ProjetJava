@@ -28,11 +28,46 @@ public enum FxmlView {
 			return rootPath + "Kits.fxml";
 		}
 	},
+	ORDRE_JOUR {
+
+		@Override
+		public String getFxmlFile() {
+			return rootPath + "OrdreJour.fxml";
+		}
+	},
+	DASHBOARD {
+
+		@Override
+		public String getFxmlFile() {
+			return rootPath + "DashboardKit.fxml";
+		}
+	},
+	DETAILS_KITS {
+
+		@Override
+		public String getFxmlFile() {
+			return rootPath + "DetailsKit.fxml";
+		}
+	},
+	ASK_KIT_DETAILS {
+
+		@Override
+		public String getFxmlFile() {
+			return rootPath + "AskForKitDetails.fxml";
+		}
+	},
 	PERSONNELS {
 
 		@Override
 		public String getFxmlFile() {
-			return rootPath + "personnels.fxml";
+			return rootPath + "Personnels.fxml";
+		}
+	},
+	PERSONNELS_MANAGEMENT {
+
+		@Override
+		public String getFxmlFile() {
+			return rootPath + "PersonnelsManagement.fxml";
 		}
 	},
 	ZONES {

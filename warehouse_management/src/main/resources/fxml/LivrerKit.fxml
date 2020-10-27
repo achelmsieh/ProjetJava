@@ -58,13 +58,21 @@
 						<Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
 					</VBox.margin>
 				</TextField>
-				<JFXComboBox fx:id="Combo" prefHeight="25.0" promptText="Responsable de production">
+				<JFXComboBox fx:id="Combo" minWidth="240.0" prefHeight="25.0" promptText="Responsable de production">
 					<VBox.margin>
 						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 					</VBox.margin>
 				</JFXComboBox>
+            <TextField fx:id="matricule_text" alignment="CENTER" promptText="Matricule...">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
 
 			</children>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
 		</VBox>
 	</left>
 	<padding>

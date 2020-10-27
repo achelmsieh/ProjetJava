@@ -1,15 +1,18 @@
 package com.alstom.controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.alstom.model.Emplacement;
-import com.alstom.model.EtatKit;
 import com.alstom.model.Kit;
-import com.alstom.model.ResProduction;
+import com.alstom.model.Personnel;
+import com.alstom.model.enums.EtatKit;
+import com.alstom.model.enums.PersonnelRole;
 import com.alstom.service.KitService;
-import com.alstom.service.ResProductionService;
+import com.alstom.service.PersonnelService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 
@@ -36,9 +39,11 @@ public class LivrerKit implements Initializable {
 	@FXML
 	private TextField of_text;
 	@FXML
+	private TextField matricule_text;
+	@FXML
 	private TableView<Kit> table_of_zone;
 	@FXML
-	private JFXComboBox<ResProduction> Combo;
+	private JFXComboBox<Personnel> Combo;
 	@FXML
 	private TableColumn<Kit, String> conlone_of;
 	@FXML
@@ -51,24 +56,35 @@ public class LivrerKit implements Initializable {
 	ObservableList<Kit> rows = FXCollections.observableArrayList();
 	KitService kitService = new KitService();
 
-	ResProductionService prs = new ResProductionService();
+	PersonnelService personnelService = new PersonnelService();
+
+	private Kit startKit = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initCols();
 
-		if (Kits.selectedKit != null)
-			rows.add(Kits.selectedKit);
-
 		table_of_zone.setItems(rows);
 
-		of_text.requestFocus();
+		initFields();
+		initSearchField();
+
+		Combo.getItems().addAll(personnelService.getPersonnels(PersonnelRole.RES_PRODUCTION));
+	}
+
+	private void initFields() {
+		Platform.runLater(() -> of_text.requestFocus());
 		of_text.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue.length() == 8)
 				Platform.runLater(() -> search());
 		});
+	}
 
-		Combo.getItems().addAll(prs.getResProduction());
+	public void setStartKit(Kit kit) {
+		startKit = kit;
+		if (startKit != null)
+			rows.add(startKit);
+		table_of_zone.refresh();
 	}
 
 	private void initCols() {
@@ -120,7 +136,8 @@ public class LivrerKit implements Initializable {
 		colone_supprimer.setCellFactory(cellFactory);
 	}
 
-	void search() {
+	private void search() {
+		// search for this kit in table rows
 		Kit k = rows.stream().filter(item -> item.getOF().equals(of_text.getText())).findFirst().orElse(null);
 		if (k != null) {
 			showErrorAlert("OF: " + of_text.getText() + " est déjà dans la liste");
@@ -128,6 +145,7 @@ public class LivrerKit implements Initializable {
 			return;
 		}
 
+		// search if this kit in database
 		Kit kit = kitService.getKitByOF(of_text.getText());
 		if (kit == null) {
 			showErrorAlert("OF: " + of_text.getText() + " n'existe pas");
@@ -152,7 +170,6 @@ public class LivrerKit implements Initializable {
 			fermerFenetre(event);
 		} else {
 			showErrorAlert("Veuillez selectionner un Responsable de production");
-
 		}
 	}
 
@@ -164,8 +181,49 @@ public class LivrerKit implements Initializable {
 
 	@FXML
 	void fermerFenetre(ActionEvent event) {
+		startKit = null;
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
+	}
+
+	private void initSearchField() {
+		matricule_text.textProperty().addListener((observable, oldValue, newValue) -> {
+			search(newValue);
+		});
+	}
+
+	private void search(String value) {
+		String val = value.replaceAll("\\s+", "");
+		if (val.isEmpty()) {
+		} else if (isNumeric(val)) {
+			List<Personnel> personnels = Combo.getItems();
+			Personnel personnel = personnels.stream().filter(e -> e.getMatricule().equals(matricule_text.getText()))
+					.findFirst().orElse(null);
+			if (personnel != null) {
+				Combo.setValue(personnel);
+			} else {
+				Combo.setValue(null);
+			}
+		}
+	}
+
+	public boolean isNumeric(String strNum) {
+		Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+
+		if (strNum == null) {
+			return false;
+		}
+
+		return pattern.matcher(strNum).matches();
+	}
+
+	void RequestFocus() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				of_text.requestFocus();
+			}
+		});
 	}
 
 }

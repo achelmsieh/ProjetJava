@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.alstom.connection.EntityManagerInitializer;
-import com.alstom.model.EtatKit;
+import com.alstom.model.enums.EtatKit;
 
 public class KPIService {
 
@@ -22,9 +22,9 @@ public class KPIService {
 
 	}
 
-	public Long getKitsEnStockCount() {
+	public Long getKitsCount( EtatKit etat) {
 		Query query = em.createQuery("SELECT count(k) FROM Kit k WHERE k.etat = :etat");
-		query.setParameter("etat", EtatKit.ENSTOCK);
+		query.setParameter("etat",  etat);
 		try {
 			return (Long) query.getSingleResult();
 		} catch (Exception e) {

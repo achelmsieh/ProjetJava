@@ -4,7 +4,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.alstom.model.ResStock;
+import com.alstom.model.Personnel;
 import com.alstom.service.LoginService;
 import com.alstom.util.FxmlView;
 import com.alstom.util.UserSession;
@@ -20,6 +20,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class Login implements Initializable {
@@ -39,7 +41,7 @@ public class Login implements Initializable {
 		if (!verifyFields())
 			return;
 
-		ResStock user = LoginService.connecting(usernameTF.getText().trim(), passwordTF.getText().trim());
+		Personnel user = LoginService.connecting(usernameTF.getText().trim(), passwordTF.getText().trim());
 
 		if (user != null) {
 			UserSession.getInstance(user);
@@ -62,8 +64,9 @@ public class Login implements Initializable {
 			Scene scene = new Scene(root);
 
 			stage.setScene(scene);
-//		primaryStage.setMaximized(true);
-			stage.setTitle("Coupure");
+			stage.setMaximized(true);
+			stage.getIcons().add(new Image("icons/warehouse.png"));
+			stage.setTitle("CoupeAYA");
 			stage.setMinWidth(1200);
 			stage.setMinHeight(650);
 			stage.setResizable(true);
@@ -73,6 +76,15 @@ public class Login implements Initializable {
 		}
 	}
 
+	@FXML
+	private void intialize_enter(ActionEvent event)
+	{
+		usernameTF.getScene().setOnKeyPressed(e -> {
+		    if (e.getCode() == KeyCode.ENTER) {
+		        System.out.println("entrer key was pressed");
+		    }
+		});
+	}
 	private boolean verifyFields() {
 		if (usernameTF == null || usernameTF.getText().isEmpty()) {
 			showUsernameError(true);
@@ -117,6 +129,7 @@ public class Login implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+	
 	}
 
 }

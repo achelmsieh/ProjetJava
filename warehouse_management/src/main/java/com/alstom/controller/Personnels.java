@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.alstom.model.Kit;
-import com.alstom.model.ResProduction;
+import com.alstom.model.Personnel;
+import com.alstom.model.enums.PersonnelRole;
 import com.alstom.service.KitService;
-import com.alstom.service.ResProductionService;
+import com.alstom.service.PersonnelService;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,25 +21,32 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
 public class Personnels implements Initializable {
 
+//	@FXML
+//	private VBox VboxAdd;
+//    @FXML
+//    private RadioButton ResStockRadio;
+//    @FXML
+//    private ToggleGroup R1;
+//    @FXML
+//    private RadioButton ResProdRadio;
+//	@FXML
+//	private VBox VboxSelect;
+//	@FXML
+//	private JFXTextField MatRes;
+//	@FXML
+//	private JFXTextField NomRes;
+//	@FXML
+//	private JFXTextField PreNomRes;
+//	@FXML
+//	private JFXPasswordField PasRes;
 	@FXML
-	private VBox VboxAdd;
-	@FXML
-	private VBox VboxSelect;
-	@FXML
-	private JFXTextField NomRes;
-	@FXML
-	private JFXComboBox<ResProduction> Combo;
+	private JFXComboBox<Personnel> Combo;
 
 	@FXML
 	private Label IdLabel;
@@ -56,56 +63,60 @@ public class Personnels implements Initializable {
 	@FXML
 	private TableColumn<Kit, String> dateSortieColumn;
 
-	ResProductionService prs = new ResProductionService();
+	PersonnelService ps = new PersonnelService();
 	KitService kits = new KitService();
 	private final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd   hh:mm");
 
-	@FXML
-	void AjouterRes(MouseEvent event) {
-		if (!VboxAdd.isVisible()) {
-			setVisibility(VboxAdd, true);
-			setVisibility(VboxSelect, false);
-		} else {
-			setVisibility(VboxAdd, false);
-			setVisibility(VboxSelect, true);
-		}
-	}
-
-	@FXML
-	void AddResProd(ActionEvent event) {
-		if (!NomRes.getText().isEmpty()) {
-
-			ResProduction res = new ResProduction();
-			res.setNom(NomRes.getText());
-			prs.save(res);
-
-			Combo.getItems().addAll(res);
-			showAlert(AlertType.INFORMATION, "Responsable Ajoutée");
-
-			setVisibility(VboxAdd, false);
-			setVisibility(VboxSelect, true);
-		} else {
-			showAlert(AlertType.ERROR, "Veuillez Saisir le nom du responsable de production");
-		}
-	}
-
-	private void showAlert(AlertType type, String msg) {
-		Alert alert = new Alert(type);
-		alert.setContentText(msg);
-		alert.show();
-	}
-
-	@FXML
-	void FermeAdd(ActionEvent event) {
-		setVisibility(VboxAdd, false);
-		setVisibility(VboxSelect, true);
-	}
-
-	private void setVisibility(Node node, Boolean etat) {
-		node.setVisible(etat);
-		node.managedProperty().bind(node.visibleProperty());
-	}
-
+//	@FXML
+//	void AjouterPer(MouseEvent event) {
+//		if (!VboxAdd.isVisible()) {
+//			setVisibility(VboxAdd, true);
+//			setVisibility(VboxSelect, false);
+//		} else {
+//			setVisibility(VboxAdd, false);
+//			setVisibility(VboxSelect, true);
+//		}
+//	}
+//	enum role {Admin, Res_production, Res_stock} ;  
+//	@FXML
+//	void AddPer(ActionEvent event) {
+//		if (!NomRes.getText().isEmpty()&&!MatRes.getText().isEmpty()&&!PasRes.getText().isEmpty()) {			
+//			Personnel res = new Personnel();
+//			res.setNom(NomRes.getText());
+//			res.setPrenom(PreNomRes.getText());
+//			res.setMatricule(MatRes.getText());
+//			if(ResStockRadio.isSelected())
+//			{
+//				res.setMotDePasse(PasRes.getText());
+//				res.setRole(PersonnelRole.ADMIN);
+//			}
+//			else
+//			{
+//			res.setRole(PersonnelRole.RES_PRODUCTION);
+//			}
+//			ps.save(res);
+//			showAlert(AlertType.INFORMATION, "Responsable "+res.getRole().toString()+"Ajoutée");
+//
+//			setVisibility(VboxAdd, false);
+//			setVisibility(VboxSelect, true);
+//		} else {
+//			showAlert(AlertType.ERROR, "Veuillez Saisir le nom du responsable de production");
+//		}
+//	}
+//	private void showAlert(AlertType type, String msg) {
+//		Alert alert = new Alert(type);
+//		alert.setContentText(msg);
+//		alert.show();
+//	}
+//	@FXML
+//	void FermeAdd(ActionEvent event) {
+//		setVisibility(VboxAdd, false);
+//		setVisibility(VboxSelect, true);
+//	}
+//	private void setVisibility(Node node, Boolean etat) {
+//		node.setVisible(etat);
+//		node.managedProperty().bind(node.visibleProperty());
+//	}
 	@FXML
 	void ActionCombo(ActionEvent event) {
 
@@ -124,13 +135,15 @@ public class Personnels implements Initializable {
 		initCombo();
 		initKitTableCols();
 
-		setVisibility(VboxAdd, false);
+//		setVisibility(VboxAdd, false);
 	}
 
 	private void initCombo() {
-		List<ResProduction> respos = new ArrayList<>();
-		prs.getResProduction().stream().forEach(e -> respos.add(e));
+		List<Personnel> respos = new ArrayList<>();
+		ps.getPersonnels(PersonnelRole.RES_PRODUCTION).stream().forEach(e -> respos.add(e));
 		Combo.getItems().addAll(respos);
+
+//		showAlert(AlertType.CONFIRMATION, respos.toString());
 	}
 
 	private void initKitTableCols() {
@@ -145,4 +158,17 @@ public class Personnels implements Initializable {
 			return new SimpleStringProperty(ds == null ? "" : dateFormat.format(ds));
 		});
 	}
+//    @FXML
+//    void HidPass(ActionEvent event) {
+//    PasRes.setVisible(false);
+//    PasRes.managedProperty().bind(PasRes.visibleProperty());
+//    }
+//    @FXML
+//    void ShowPass(ActionEvent event)
+//    {
+//   PasRes.setVisible(true);
+//   PasRes.managedProperty().bind(PasRes.visibleProperty());
+//    	
+//    }
+
 }

@@ -1,27 +1,48 @@
 package com.alstom.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.alstom.model.Personnel;
+import com.alstom.util.UserSession;
+
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 
-public class Menu extends GenericController {
-
-	@FXML
-	void menuKits(MouseEvent event) {
-		toMenuKits();
-	}
+public class Menu extends MenuGenericController implements Initializable {
 
 	@FXML
-	void menuPersonnels(MouseEvent event) {
-		toMenuPersonnels();
+	private HBox normalUserAction;
+	@FXML
+	private HBox adminActions;
+	Personnel personnel;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		personnel = UserSession.getUser();
+
+		if (personnel != null) {
+			setUserView();
+		}
 	}
 
-	@FXML
-	void menuEmplacements(MouseEvent event) {
-		toMenuZones();
+	private void setUserView() {
+		switch (personnel.getRole()) {
+		case ADMIN:
+			break;
+
+		case RES_STOCK:
+		default:
+			setVisibility(adminActions, false);
+			break;
+		}
 	}
 
-	@FXML
-	void menuKPI(MouseEvent event) {
-		toMenuKPI();
+	private void setVisibility(Node node, boolean visible) {
+		node.setVisible(visible);
+		node.managedProperty().bind(node.visibleProperty());
 	}
+
 }

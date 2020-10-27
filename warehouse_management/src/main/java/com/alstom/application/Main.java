@@ -18,6 +18,7 @@ public class Main extends Application {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
+
 		EntityManagerInitializer.init();
 //		AppInitializer.init();
 //		AppInitializer.fetchAllData();
@@ -28,7 +29,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 
 			primaryStage.getIcons().add(new Image("icons/warehouse.png"));
-			primaryStage.setTitle("Coupure");
+			primaryStage.setTitle("CoupeAYA");
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();

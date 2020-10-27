@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="1.7976931348623157E308"
+	maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="1100.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.alstom.controller.PersonnelsManagement">
+	<left>
+		<VBox alignment="CENTER_LEFT" minHeight="500.0" minWidth="300.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<HBox alignment="CENTER" minWidth="300.0">
+					<children>
+						<ImageView fx:id="AddImage" fitHeight="116.0"
+							fitWidth="169.0" onMouseClicked="#AjouterPer" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/addResProd.png" />
+							</image>
+							<VBox.margin>
+								<Insets top="30.0" />
+							</VBox.margin>
+						</ImageView>
+						<ImageView fx:id="ModifImage" fitHeight="116.0"
+							fitWidth="169.0" onMouseClicked="#ModifPer" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/Modify_user.png" />
+							</image>
+							<VBox.margin>
+								<Insets top="30.0" />
+							</VBox.margin>
+						</ImageView>
+						<ImageView fx:id="RemoveImage" fitHeight="116.0"
+							fitWidth="169.0" onMouseClicked="#RemovePer" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../icons/remove_user.png" />
+							</image>
+						</ImageView>
+					</children>
+					<padding>
+						<Insets bottom="40.0" />
+					</padding>
+				</HBox>
+				<VBox fx:id="VboxAdd" alignment="CENTER" maxHeight="-Infinity"
+					maxWidth="-Infinity" minHeight="-Infinity" minWidth="300.0">
+					<children>
+						<VBox alignment="CENTER_LEFT" prefHeight="100.0"
+							prefWidth="200.0" spacing="10.0">
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+							<VBox.margin>
+								<Insets top="10.0" />
+							</VBox.margin>
+							<children>
+								<RadioButton fx:id="AdminRadio"
+									mnemonicParsing="false" onAction="#ShowPass"
+									text="Administrateur" toggleGroup="$R1">
+									<toggleGroup>
+										<ToggleGroup fx:id="R1" />
+									</toggleGroup>
+								</RadioButton>
+								<RadioButton fx:id="ResStockRadio"
+									mnemonicParsing="false" onAction="#ShowPass" selected="true"
+									text="Responsable de Stock" toggleGroup="$R1">
+
+								</RadioButton>
+								<RadioButton fx:id="ResProdRadio"
+									mnemonicParsing="false" onAction="#HidPass"
+									text="Responsable de production" toggleGroup="$R1" />
+							</children>
+						</VBox>
+						<HBox alignment="CENTER" prefHeight="100.0" prefWidth="275.0">
+							<children>
+								<JFXTextField fx:id="MatRes" maxHeight="-Infinity"
+									maxWidth="-Infinity" minHeight="35.0" minWidth="230.0"
+									promptText="Matricule...." />
+								<ImageView fitHeight="46.0" fitWidth="50.0"
+									onMouseClicked="#ImprimerMat" pickOnBounds="true"
+									preserveRatio="true">
+									<image>
+										<Image url="@../icons/barcode.png" />
+									</image>
+									<viewport>
+										<Rectangle2D />
+									</viewport>
+								</ImageView>
+							</children>
+						</HBox>
+						<JFXTextField fx:id="NomRes" maxHeight="-Infinity"
+							maxWidth="-Infinity" minHeight="35.0" minWidth="230.0"
+							promptText="Nom...">
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+						</JFXTextField>
+						<JFXTextField fx:id="PreNomRes" maxHeight="-Infinity"
+							maxWidth="-Infinity" minHeight="35.0" minWidth="230.0"
+							promptText="Prénom..." />
+						<JFXPasswordField fx:id="PasRes"
+							maxHeight="-Infinity" maxWidth="-Infinity" minHeight="35.0"
+							minWidth="230.0" promptText="Mot de Passe..." />
+						<HBox fx:id="HboxAjout" alignment="CENTER" minHeight="50.0"
+							minWidth="300.0" spacing="5.0">
+							<children>
+								<JFXButton buttonType="RAISED" onAction="#AddPer"
+									style="-fx-background-color: #04599C;" text="Ajouter"
+									textFill="WHITE">
+									<HBox.margin>
+										<Insets />
+									</HBox.margin>
+									<padding>
+										<Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+									</padding>
+								</JFXButton>
+								<JFXButton onAction="#FermerForm" text="Annuler" />
+							</children>
+							<VBox.margin>
+								<Insets top="20.0" />
+							</VBox.margin>
+						</HBox>
+						<HBox fx:id="HboxModif" alignment="CENTER" minHeight="50.0"
+							minWidth="300.0" spacing="5.0" visible="false">
+							<children>
+								<JFXButton buttonType="RAISED" onAction="#ModifyPer"
+									style="-fx-background-color: #04599C;" text="Valider"
+									textFill="WHITE">
+									<HBox.margin>
+										<Insets />
+									</HBox.margin>
+									<padding>
+										<Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+									</padding>
+								</JFXButton>
+								<JFXButton onAction="#FermerForm" text="Annuler" />
+							</children>
+							<VBox.margin>
+								<Insets top="20.0" />
+							</VBox.margin>
+						</HBox>
+
+					</children>
+				</VBox>
+			</children>
+			<opaqueInsets>
+				<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+			</opaqueInsets>
+		</VBox>
+	</left>
+	<center>
+		<TableView fx:id="PersonnelTable"
+			maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+			minWidth="760.0" BorderPane.alignment="CENTER">
+			<columns>
+				<TableColumn fx:id="MatriculeColumn" maxWidth="-1.0"
+					minWidth="190.0" prefWidth="-1.0" text="Matricule" />
+				<TableColumn fx:id="NomColumn" maxWidth="183.0"
+					minWidth="153.0" prefWidth="153.0" text="Nom" />
+				<TableColumn fx:id="PrenomColumn" maxWidth="185.0"
+					minWidth="138.0" prefWidth="138.0" text="Prenom" />
+				<TableColumn fx:id="FonctionColumn" prefWidth="164.0"
+					text="Fonction" />
+				<TableColumn fx:id="MDPColumn" maxWidth="-1.0"
+					minWidth="190.0" prefWidth="-1.0" text="Mot de passe" />
+			</columns>
+		</TableView>
+	</center>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
+</BorderPane>

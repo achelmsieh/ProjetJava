@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import eu.hansolo.medusa.Gauge?>
-<!-- <?import eu.hansolo.medusa.FGauge?> <?import eu.hansolo.medusa.Gauge?> -->
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 
 
 <BorderPane maxHeight="1.7976931348623157E308"
@@ -22,24 +23,29 @@
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.alstom.controller.KPI">
 	<center>
-		<VBox prefHeight="500.0" prefWidth="1100.0"
+		<VBox prefHeight="500.0" prefWidth="1100.0" alignment="CENTER"
 			BorderPane.alignment="CENTER">
 			<children>
-				<HBox prefHeight="250.0" prefWidth="1100.0">
+				<HBox minHeight="250.0" minWidth="1100.0" alignment="CENTER"
+					VBox.vgrow="ALWAYS">
 					<children>
-						<HBox prefHeight="250.0" prefWidth="550.0">
+						<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER"
+							VBox.vgrow="ALWAYS">
 							<children>
 								<HBox prefHeight="250.0" prefWidth="550.0"
 									alignment="CENTER">
 									<children>
-										<!-- <PieChart fx:id="chart_stock" prefHeight="208.0" prefWidth="293.0" 
-											/> -->
-										<Gauge fx:id="chart_stock2" />
+										<Gauge fx:id="chart_stock2" prefHeight="200.0"
+											prefWidth="260.0">
+											<padding>
+												<Insets right="30.0" />
+											</padding>
+										</Gauge>
 									</children>
 								</HBox>
 							</children>
 						</HBox>
-						<VBox alignment="CENTER" prefHeight="250.0" prefWidth="275.0">
+						<VBox alignment="CENTER" prefHeight="250.0" prefWidth="300.0">
 							<children>
 								<HBox alignment="CENTER_LEFT" prefHeight="80.0"
 									prefWidth="550.0">
@@ -89,10 +95,34 @@
 										</Label>
 									</children>
 								</HBox>
+								<HBox alignment="CENTER_LEFT" prefHeight="80.0"
+									prefWidth="550.0">
+									<children>
+										<ImageView fitHeight="52.0" fitWidth="200.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../icons/up.png" />
+											</image>
+										</ImageView>
+										<Label text="Planing:">
+											<font>
+												<Font name="Arial Bold" size="17.0" />
+											</font>
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+										</Label>
+										<Label fx:id="nombre_planing">
+											<font>
+												<Font size="17.0" />
+											</font>
+										</Label>
+									</children>
+								</HBox>
 
 							</children>
 						</VBox>
-						<VBox alignment="CENTER" prefHeight="250.0" prefWidth="275.0">
+						<VBox alignment="CENTER" prefHeight="250.0" prefWidth="250.0">
 							<children>
 								<HBox alignment="CENTER_LEFT" prefHeight="80.0"
 									prefWidth="550.0">
@@ -121,12 +151,26 @@
 						</VBox>
 					</children>
 				</HBox>
-				<HBox prefHeight="250.0" prefWidth="1100.0">
+				<HBox minHeight="250.0" minWidth="1100.0" alignment="CENTER"
+					VBox.vgrow="ALWAYS">
 					<children>
 						<HBox prefHeight="250.0" prefWidth="550.0" alignment="CENTER">
 							<children>
-								<PieChart fx:id="chart_projet" prefHeight="208.0"
-									prefWidth="293.0" />
+								<VBox prefHeight="250.0" prefWidth="200.0"
+									alignment="TOP_CENTER" spacing="10">
+									<children>
+										<JFXToggleButton text="Stock"
+											onAction="#StockPie" selected="true">
+											<toggleGroup>
+												<ToggleGroup fx:id="R1" />
+											</toggleGroup>
+										</JFXToggleButton>
+										<JFXToggleButton text="Planing"
+											onAction="#PlaningPie" toggleGroup="$R1" />
+									</children>
+								</VBox>
+								<PieChart fx:id="chart_projet" minHeight="300.0"
+									minWidth="300.0" />
 
 							</children>
 						</HBox>

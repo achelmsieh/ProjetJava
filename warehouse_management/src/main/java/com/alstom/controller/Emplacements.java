@@ -1,11 +1,12 @@
 package com.alstom.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.alstom.model.Emplacement;
@@ -40,9 +41,7 @@ public class Emplacements implements Initializable {
 	}
 
 	private void initCells() {
-		List<Emplacement> emps = getOccupedEmps();
-
-		emps.stream().forEach(emp -> {
+		getOccupedEmpsMap().forEach((emp, OFs) -> {
 			if (!colAllowed.contains(col))
 				col++;
 			if (col >= 8) {
@@ -50,50 +49,42 @@ public class Emplacements implements Initializable {
 				col = 0;
 			}
 
-			addRectangel(emp);
-			addZoneLabel(emp);
-
-			if (emp.getKits() != null && emp.getKits().size() > 0) {
-				addOfLabel(emp);
+			if (OFs != null && !OFs.isEmpty()) {
+				addRectangel("FF0000");
+				addOfLabel(OFs);
+			} else {
+				addRectangel("008000");
 			}
 
+			addZoneLabel(emp);
 			col++;
 		});
 	}
 
-	private List<Emplacement> getOccupedEmps() {
-//		List<Emplacement> emps = emplacementService.getAllZoneEmplacements(Zones.selectedZone);
-//		List<Emplacement> emps = emplacementService.getEmplacements().stream()
-//				.filter(emp -> emp.getCoordonnee().substring(0, 1).equals(Zones.selectedZone))
-//				.collect(Collectors.toList());
+	private Map<String, List<String>> getOccupedEmpsMap() {
+		Map<String, List<String>> resltMap = new HashMap<String, List<String>>();
+		List<Kit> Kits = ks.getKitsByZone(Zones.selectedZone);
 
-		List<Emplacement> emplacements = new ArrayList<Emplacement>();
-
-		List<Kit> kits = ks.getKitsByZone(Zones.selectedZone);
 		for (int i = 1; i < 25; i++) {
 			String etiquette = new StringBuilder(Zones.selectedZone).append(i < 10 ? "0" + i : i).toString();
 
-			final Emplacement emp = new Emplacement(etiquette);
-			Kit k = kits.stream().filter(kit -> kit.getEmplacements() != null && kit.getEmplacements().contains(emp))
-					.findFirst().orElse(null);
+			List<String> OFs = getOFsForEtiquette(Kits, etiquette);
 
-			if (k != null) {
-				emplacements.add(k.getEmplacements().stream().filter(e -> e.getCoordonnee().equals(etiquette))
-						.findFirst().orElse(null));
-			} else
-				emplacements.add(emp);
+			resltMap.put(etiquette, OFs);
 		}
 
-		return emplacements.stream().sorted(Comparator.comparing(Emplacement::getCoordonnee))
-				.collect(Collectors.toList());
+		TreeMap<String, List<String>> sorted = new TreeMap<>(resltMap);
+		return sorted;
 	}
 
-	private void addRectangel(Emplacement emp) {
-		String couleur = "008000";
-		if (emp.getKits() != null && emp.getKits().size() > 0)
-			if (emp.getKits() != null && emp.getKits().size() > 0)
-				couleur = "FF0000";
+	private List<String> getOFsForEtiquette(List<Kit> kits, String etiquette) {
+		return kits.stream()
+				.filter(kit -> kit.getEmplacements() != null
+						&& kit.getEmplacements().contains(new Emplacement(etiquette)))
+				.distinct().map(Kit::getOF).collect(Collectors.toList());
+	}
 
+	private void addRectangel(String couleur) {
 		HBox rec = new HBox();
 		rec.setFillHeight(true);
 		rec.setStyle("-fx-background-color: #" + couleur);
@@ -101,8 +92,8 @@ public class Emplacements implements Initializable {
 		gridPane.add(rec, col, row);
 	}
 
-	private void addZoneLabel(Emplacement emp) {
-		Label zoneLabel = new Label(emp.getCoordonnee());
+	private void addZoneLabel(String empLabel) {
+		Label zoneLabel = new Label(empLabel);
 		zoneLabel.setAlignment(Pos.CENTER);
 		zoneLabel.setTextFill(Color.WHITE);
 		gridPane.setHalignment(zoneLabel, HPos.CENTER);
@@ -110,9 +101,9 @@ public class Emplacements implements Initializable {
 		gridPane.add(zoneLabel, col, row);
 	}
 
-	private void addOfLabel(Emplacement emp) {
-		String OFs = emp.getKits().stream().map(Kit::getOF).collect(Collectors.joining("\n"));
-		Label ofLabel = new Label(OFs);
+	private void addOfLabel(List<String> OFs) {
+		String OFString = OFs.stream().collect(Collectors.joining("\n"));
+		Label ofLabel = new Label(OFString);
 		ofLabel.setAlignment(Pos.CENTER);
 		ofLabel.setTextFill(Color.WHITE);
 		gridPane.setHalignment(ofLabel, HPos.CENTER);

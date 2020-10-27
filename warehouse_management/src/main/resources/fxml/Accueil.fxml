@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,68 +15,16 @@
 
 	</center>
 	<top>
-		<BorderPane minHeight="100.0" minWidth="1100.0" BorderPane.alignment="CENTER">
+		<BorderPane minHeight="100.0" minWidth="1100.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" BorderPane.alignment="CENTER">
 			<left>
 				<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
 					<image>
-						<Image url="@../icons/coupure.gif" />
+						<Image url="@../icons/logo.png" />
 					</image>
 				</ImageView>
 			</left>
-			<center>
-				<HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
-					<children>
-						<JFXButton fx:id="btnAccueil" onMouseClicked="#menuAccueil" style="-fx-background-color: #fc1616;" text="Accueil" textFill="WHITE">
-							<font>
-								<Font name="System Bold" size="18.0" />
-							</font>
-							<HBox.margin>
-								<Insets left="30.0" />
-							</HBox.margin>
-						</JFXButton>
-						<JFXButton fx:id="btnKits" layoutX="40.0" layoutY="36.0" onMouseClicked="#menuKits" style="-fx-background-color: transparent;" text="Kits">
-							<font>
-								<Font name="System Bold" size="18.0" />
-							</font>
-							<HBox.margin>
-								<Insets left="30.0" />
-							</HBox.margin>
-						</JFXButton>
-						<JFXButton fx:id="btnPersonnels" layoutX="125.0" layoutY="36.0" onMouseClicked="#menuPersonnels" style="-fx-background-color: transparent;" text="Personnels">
-							<font>
-								<Font name="System Bold" size="18.0" />
-							</font>
-							<HBox.margin>
-								<Insets left="30.0" />
-							</HBox.margin>
-						</JFXButton>
-						<JFXButton fx:id="btnEmplacements" layoutX="175.0" layoutY="36.0" onMouseClicked="#menuEmplacements" style="-fx-background-color: transparent;" text="Emplacements">
-							<font>
-								<Font name="System Bold" size="18.0" />
-							</font>
-							<HBox.margin>
-								<Insets left="30.0" />
-							</HBox.margin>
-						</JFXButton>
-						<JFXButton fx:id="btnKPI" layoutX="232.0" layoutY="36.0" onMouseClicked="#menuKPI" style="-fx-background-color: transparent;" text="KPI">
-							<font>
-								<Font name="System Bold" size="18.0" />
-							</font>
-							<HBox.margin>
-								<Insets left="30.0" />
-							</HBox.margin>
-						</JFXButton>
-					</children>
-					<BorderPane.margin>
-						<Insets left="30.0" />
-					</BorderPane.margin>
-					<padding>
-						<Insets top="10.0" />
-					</padding>
-				</HBox>
-			</center>
 			<right>
-				<JFXButton fx:id="btnDeconnection" onMouseClicked="#seDeconncecter" style="-fx-background-color: #F5BA53;" text="Se déconnecter" BorderPane.alignment="CENTER">
+				<JFXButton onMouseClicked="#seDeconncecter" style="-fx-background-color: #F5BA53;" text="Se déconnecter" BorderPane.alignment="CENTER">
 					<font>
 						<Font name="System Bold" size="18.0" />
 					</font>
@@ -88,11 +37,100 @@
 				</JFXButton>
 			</right>
 			<BorderPane.margin>
-				<Insets left="50.0" right="50.0" />
+				<Insets bottom="10.0" />
 			</BorderPane.margin>
+         <bottom>
+				<HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+					<children>
+						<JFXButton onMouseClicked="#menuAccueil" style="-fx-background-color: #fc1616;" text="Accueil" textFill="WHITE">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton layoutX="40.0" layoutY="36.0" onMouseClicked="#menuKits" style="-fx-background-color: transparent;" text="Kits">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="20.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton layoutX="155.0" layoutY="46.0" onMouseClicked="#menuOrdres" style="-fx-background-color: transparent;" text="Ordre du Jour">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="20.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton fx:id="btnDashboard" layoutX="155.0" layoutY="46.0" onMouseClicked="#menuDashboard" style="-fx-background-color: transparent;" text="Détails des Ordres">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="20.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton layoutX="175.0" layoutY="36.0" onMouseClicked="#menuEmplacements" style="-fx-background-color: transparent;" text="Emplacements">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="20.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton layoutX="125.0" layoutY="36.0" onMouseClicked="#menuPersonnels" style="-fx-background-color: transparent;" text="Personnels">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="20.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton fx:id="btnRoles" layoutX="540.0" layoutY="46.0" onMouseClicked="#menuRoles" style="-fx-background-color: transparent;" text="Gestion des Rôles">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="20.0" />
+							</HBox.margin>
+						</JFXButton>
+						<JFXButton fx:id="btnKPI" layoutX="232.0" layoutY="36.0" onMouseClicked="#menuKPI" style="-fx-background-color: transparent;" text="KPI" HBox.hgrow="ALWAYS">
+							<font>
+								<Font name="System Bold" size="18.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="20.0" />
+							</HBox.margin>
+						</JFXButton>
+					</children>
+					<BorderPane.margin>
+						<Insets />
+					</BorderPane.margin>
+					<padding>
+						<Insets top="10.0" />
+					</padding>
+				</HBox>
+         </bottom>
+         <padding>
+            <Insets bottom="10.0" left="50.0" right="50.0" />
+         </padding>
+         <center>
+            <Label fx:id="userLabel" text="User" BorderPane.alignment="CENTER_RIGHT">
+               <font>
+                  <Font name="Ebrima Bold" size="16.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets right="20.0" top="8.0" />
+               </BorderPane.margin>
+            </Label>
+         </center>
 		</BorderPane>
 	</top>
 	<center>
-		<Pane fx:id="contentArea" minHeight="500.0" minWidth="1100.0" BorderPane.alignment="CENTER" />
+		<Pane minHeight="500.0" minWidth="1100.0" BorderPane.alignment="CENTER" />
 	</center>
 </BorderPane>

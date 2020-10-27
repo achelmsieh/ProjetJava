@@ -9,28 +9,28 @@ import java.util.List;
 import java.util.Set;
 
 import com.alstom.model.Emplacement;
-import com.alstom.model.EtatKit;
 import com.alstom.model.Kit;
-import com.alstom.model.ResProduction;
-import com.alstom.model.ResStock;
+import com.alstom.model.Personnel;
+import com.alstom.model.enums.EtatKit;
+import com.alstom.model.enums.PersonnelRole;
 
 public class AppInitializer {
 
-	private static ResStockService rss = new ResStockService();
-	private static ResProductionService rps = new ResProductionService();
+	private static PersonnelService ps = new PersonnelService();
 	private static KitService ks = new KitService();
 	private static EmplacementService es = new EmplacementService();
 
 	public static void init() {
+		initAdmin();
 		initResStock();
 		initResProduction();
 		initEmplacements();
-		initKits();
+//		initKits();
 	}
 
 	public static void initEmplacements() {
-		System.out.println("init emplacements");
 		char[] alpha = "ABCDEFGHIJKLMN".toCharArray();
+//		char[] alpha = "abcdefghigklmn".toCharArray();
 
 		List<Emplacement> emps = new ArrayList<>();
 
@@ -42,20 +42,21 @@ public class AppInitializer {
 		}
 
 		es.save(emps);
-		System.out.println("init end");
+	}
+
+	public static void initAdmin() {
+		ps.save(new Personnel("Admin", "1", "111", "111", PersonnelRole.ADMIN));
 	}
 
 	public static void initResStock() {
-
-		rss.save(new ResStock("1", "1"));
-		rss.save(new ResStock("2", "2"));
+		ps.save(new Personnel("res_stock", "1", "1", "1", PersonnelRole.RES_STOCK));
+		ps.save(new Personnel("res_stock", "2", "2", "2", PersonnelRole.RES_STOCK));
 	}
 
 	public static void initResProduction() {
-
-		rps.save(new ResProduction("rp1"));
-		rps.save(new ResProduction("rp2"));
-		rps.save(new ResProduction("rp3"));
+		ps.save(new Personnel("res_prod", "1", "11", "11", PersonnelRole.RES_PRODUCTION));
+		ps.save(new Personnel("res_prod", "2", "22", "22", PersonnelRole.RES_PRODUCTION));
+		ps.save(new Personnel("res_prod", "3", "33", "33", PersonnelRole.RES_PRODUCTION));
 	}
 
 	public static void initKits() {
@@ -80,23 +81,26 @@ public class AppInitializer {
 		emps5.add(es.getEmplacement("B02"));
 
 		kits.add(new Kit("11111111", EtatKit.ENSTOCK, "pjr1", getDate("04/01/2020 14:50"), null, emps1,
-				rss.getResStock("1"), null));
+				ps.getPersonnel("1"), null));
 		kits.add(new Kit("22222222", EtatKit.ENSTOCK, "pjr1", getDate("05/01/2020 10:15"), null, emps2,
-				rss.getResStock("1"), null));
+				ps.getPersonnel("1"), null));
 		kits.add(new Kit("33333333", EtatKit.SORTIE, "pjr2", getDate("17/03/2020 11:15"), getDate("18/03/2020 14:50"),
-				null, rss.getResStock("1"), rps.getResProduction("rp1")));
+				null, ps.getPersonnel("1"), ps.getPersonnel("11")));
 		kits.add(new Kit("44444444", EtatKit.ENSTOCK, "pjr2", getDate("25/08/2020 14:50"), null, emps4,
-				rss.getResStock("1"), null));
+				ps.getPersonnel("1"), null));
 		kits.add(new Kit("55555555", EtatKit.ENSTOCK, "pjr3", getDate("09/09/2020 14:50"), null, emps5,
-				rss.getResStock("1"), null));
+				ps.getPersonnel("1"), null));
 
-		ks.save(kits);
+//		ks.save(kitService);
 	}
 
 	public static void fetchAllData() {
-		rss.getResStock().stream().forEach(System.out::println);
-		rps.getResProduction().stream().forEach(System.out::println);
+		ps.getPersonnels().stream().forEach(System.out::println);
 		es.getEmplacements().stream().forEach(System.out::println);
+		ks.getKits().stream().forEach(System.out::println);
+	}
+
+	public static void showKits() {
 		ks.getKits().stream().forEach(System.out::println);
 	}
 
